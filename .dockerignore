@@ -1,0 +1,14 @@
+.git
+.gitignore
+LICENSE
+VERSION
+README.md
+Changelog.md
+Makefile
+docker-compose.yml
+docs
+package-lock.json
+yarn.lock
+dist
+node_modules
+package-lock.json

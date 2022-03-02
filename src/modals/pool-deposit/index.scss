@@ -1,0 +1,19 @@
+@import "../../module.variables.scss";
+
+.ModalPoolDeposit {
+  .InputWraper {
+    .input {
+      width: 100%;
+    }
+  }
+
+  .ctas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .Button {
+      padding: 0 35px;
+    }
+  }
+}

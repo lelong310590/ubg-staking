@@ -1,0 +1,23 @@
+# ubg-farm-client-production -> <your_app_name>
+
+steps:
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: 'bash'
+    args: [ '-c', 'gcloud secrets versions access latest --secret=dockerhub-vonicvn > decrypted-data.txt' ]
+
+  - name: "gcr.io/cloud-builders/docker"
+    entrypoint: 'bash'
+    args: ["-c", "docker login --username=vonicvn --password-stdin < decrypted-data.txt"]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "vonicvn/ubg-farm-client-production:$REVISION_ID", "."]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "vonicvn/ubg-farm-client-production:$REVISION_ID"]
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "compute","ssh","jasontran@services","--zone=asia-east1-b","--force-key-file-overwrite",
+        "--command=docker pull vonicvn/ubg-farm-client-production:$REVISION_ID && docker service update ubg-farm-client-production_app --image vonicvn/ubg-farm-client-production:$REVISION_ID"
+      ]

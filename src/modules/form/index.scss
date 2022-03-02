@@ -1,0 +1,68 @@
+@import "../../module.variables.scss";
+
+.InputWraper {
+  margin-bottom: 1.2rem;
+
+  > label {
+    margin-bottom: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+
+    span.tagOptional {
+      margin-left: 0.4rem;
+      font-size: 80%;
+      opacity: 0.5;
+    }
+  } 
+
+  .description {
+    display: inline-flex;
+    margin-bottom: 0.4rem;
+    color: $grey;
+  }
+
+  > .inputSection {
+    margin-bottom: 0.5rem;
+
+    > .input {
+      border: 1px solid $borderColor;
+      border-radius: $borderRadius;
+      position: relative;
+      display: inline-flex;
+      max-width: 100%;
+      width: 21.5rem;
+    }
+
+    > .errorMessage {
+      color: $danger;
+      margin-top: 0.2rem;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+    &.hasError .input {
+      border-color: $danger;
+    }
+  }
+
+  &.hasMutilLocale {
+    > .inputSection {
+      > .input {
+        > .locale {
+          font-size: 0.9em;
+          background: rgba($color: $dark, $alpha: 0.05);
+          border-right: 1px solid $borderColor;
+          color: $grey;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: max-content;
+          padding: 0 0.5rem;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}

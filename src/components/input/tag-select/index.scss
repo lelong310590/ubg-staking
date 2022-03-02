@@ -1,0 +1,22 @@
+@import "../../../module.variables.scss";
+
+.InputTagSelect {
+  .item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: $inputHeight;
+    border: 1px solid $borderColor;
+    padding: 0 15px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: $borderRadius;
+    cursor: pointer;
+    font-weight: 500;
+
+    &.active {
+      border-color: $primary;
+      color: $primary;
+    }
+  }
+}

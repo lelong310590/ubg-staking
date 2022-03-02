@@ -1,0 +1,14 @@
+@import '../../module.variables.scss';
+
+.Message {
+  border: 1px dashed $grey;
+  padding: 10px;
+  display: inline-flex;
+  color: $grey;
+  font-weight: 300;
+
+  &.ERROR {
+    color: $danger;
+    border-color: $danger;
+  }
+}

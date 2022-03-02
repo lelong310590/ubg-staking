@@ -1,0 +1,14 @@
+@import "./password";
+@import "./tag-select";
+
+input,
+textarea {
+  outline: none;
+  border: none;
+  height: $inputHeight;
+  border-radius: $borderRadius;
+  font-size: 1em;
+  font-weight: 400;
+  padding: 0 7px;
+  width: 100%;
+}

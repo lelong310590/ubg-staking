@@ -1,0 +1,280 @@
+@import "./module.variables.scss";
+@import "./components";
+@import "./modules";
+@import "./pages";
+@import "./modals";
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  color: $dark;
+  width: 100%;
+  height: 100%;
+}
+
+#__next,
+.AppWraper {
+  width: 100%;
+  height: 100%;
+}
+
+// ============================ Link style ================================
+a {
+  color: $dark;
+  text-decoration: none;
+  font-weight: 500;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.link {
+  color: $info;
+}
+// ============================ End Link style ============================
+
+// ============================ Element style ================================
+img {
+  max-width: 100%;
+}
+// ============================ End Element style ============================
+
+// ============================ Layout style ================================
+.textRight {
+  text-align: right !important;
+}
+
+.textEllipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.textItalic {
+  font-style: italic;
+}
+
+.textLeft {
+  text-align: left !important;
+}
+
+.textCenter {
+  text-align: center !important;
+}
+
+.textBold {
+  font-weight: 600;
+  color: $dark;
+}
+
+.textSuccess {
+  color: $success !important;
+}
+
+.textWarning {
+  color: $warning !important;
+}
+
+.textPrimary {
+  color: $primary !important;
+}
+
+.textGrey {
+  color: $grey !important;
+}
+
+.textInfo {
+  color: $info !important;
+}
+
+.textDanger {
+  color: $danger !important;
+}
+
+@for $i from 0 to 200 {
+  .w#{$i} {
+    width: $i + unquote("px") !important;
+  }
+}
+
+@for $i from 0 to 200 {
+  .mb#{$i} {
+    margin-bottom: $i + unquote("px") !important;
+  }
+}
+
+@for $i from 0 to 200 {
+  .mt#{$i} {
+    margin-top: $i + unquote("px") !important;
+  }
+}
+
+@for $i from 0 to 200 {
+  .mr#{$i} {
+    margin-right: $i + unquote("px") !important;
+  }
+}
+
+@for $i from 0 to 200 {
+  .ml#{$i} {
+    margin-left: $i + unquote("px") !important;
+  }
+}
+
+@for $i from 0 to 200 {
+  .pdb#{$i} {
+    padding-bottom: $i + unquote("px") !important;
+  }
+}
+
+@for $i from 0 to 200 {
+  .pdt#{$i} {
+    padding-top: $i + unquote("px") !important;
+  }
+}
+
+@for $i from 0 to 200 {
+  .pdr#{$i} {
+    padding-right: $i + unquote("px") !important;
+  }
+}
+
+@for $i from 0 to 200 {
+  .pdl#{$i} {
+    padding-left: $i + unquote("px") !important;
+  }
+}
+
+@for $i from 0 to 200 {
+  .pd#{$i} {
+    padding: $i + unquote("px") !important;
+  }
+}
+
+.wfull {
+  width: 100%;
+}
+
+.sticky {
+  position: sticky;
+
+  &.top30 {
+    top: 30px;
+  }
+}
+// ============================ End Layout style ============================
+
+// ============================ Scrollbar style ================================
+* {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: $light;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba($color: $grey, $alpha: 0.5);
+    border-radius: 5px;
+
+    &:hover {
+      background: $grey;
+    }
+  }
+}
+// ============================ End Scrollbar style ============================
+
+// ============================ Typograrphy style ================================
+.textDanger {
+  color: $danger;
+}
+// ============================ End Typograrphy style ============================
+
+// ============================ SMCWraper style ================================
+.SMCWraper {
+  text-align: center;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  img.logo {
+    width: 130px;
+    margin-bottom: 25px;
+  }
+
+  .title {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+  }
+}
+// ============================ End SMCWraper style ============================
+
+// ============================ User Balance style ================================
+.UserBalance {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-weight: 500;
+
+  .label {
+    margin-right: 5px;
+  }
+
+  .icon {
+    svg {
+      height: 18px;
+      margin-right: 7px;
+
+      * {
+        fill: $dark;
+      }
+    }
+  }
+}
+// ============================ End User Balance style ============================
+
+// ============================ SmcButton style ================================
+.SmcButton {
+  @include flexBox;
+  border: 1px solid $dark;
+  border-radius: $borderRadius;
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  img {
+    height: 2.1rem;
+    margin-right: 0.5rem;
+  }
+}
+// ============================ End SmcButton style ============================
+
+.Loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+  svg {
+    margin-right: 0.5rem;
+  }
+}

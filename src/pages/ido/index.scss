@@ -1,0 +1,146 @@
+@import "../../module.variables.scss";
+
+.IDOPage {
+  padding: 30px;
+
+  .head {
+    display: flex;
+    align-items: center;
+
+    img {
+      max-width: 180px;
+      margin-right: 1rem;
+    }
+
+    .content {
+      h1 {
+        font-size: 3rem;
+        line-height: 3rem;
+        font-weight: 300;
+        color: $primary;
+        margin-bottom: 1rem;
+        margin-top: 0;
+        font-weight: bold;
+      }
+
+      p {
+        color: $dark;
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .IdoPrice {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: $primary;
+    border: 1px solid $primary;
+    padding: 5px 7px;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    .label {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .value {
+      font-size: 1.7rem;
+    }
+  }
+
+  .listNote {
+    line-height: 1.8rem;
+    margin-top: 1rem;
+
+    ul {
+      list-style-position: inside;
+      margin-bottom: 0.8rem;
+    }
+  }
+
+  .CountDown {
+    @include flexBox(center, center, column);
+    font-size: 1.4rem;
+    padding: 5rem 0;
+
+    .title {
+      font-size: 1rem;
+      font-weight: bolder;
+      margin-bottom: 1.5rem;
+    }
+
+    .body {
+      @include flexBox;
+
+      .item {
+        @include flexBox(center, center, column);
+        margin: 0.2rem;
+
+        &:last-child {
+          border-right: 0;
+        }
+
+        .value {
+          font-size: 5.2rem;
+          font-weight: 200;
+          padding: 10px;
+          margin-bottom: 0.3rem;
+          display: flex;
+        }
+
+        .label {
+          font-size: 0.9rem;
+          display: flex;
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+
+  .Form {
+    padding: 1rem;
+    border: 1px solid $primary;
+    border-radius: 0.7rem;
+    margin-bottom: 2rem;
+
+    .labelWraper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      &.active {
+        justify-content: space-between;
+      }
+    }
+
+    button {
+      .label {
+        width: 100%;
+      }
+    }
+
+    .formTitle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $primary;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .InputWraper {
+      .input {
+        width: 100%;
+      }
+    }
+
+    .Button {
+      width: 100%;
+    }
+  }
+}

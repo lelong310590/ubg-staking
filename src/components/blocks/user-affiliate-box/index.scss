@@ -1,0 +1,60 @@
+@import "../../../module.variables.scss";
+
+.UserAffiliateBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: $buttonHeight;
+  padding: 0 10px;
+  border-radius: $borderRadius;
+  border: 1px solid $borderColor;
+ 
+  svg * {
+    fill: $dark;
+  }
+
+  span.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      height: 15px;
+      margin-right: 7px;
+    }
+  }
+
+  span.btnCopy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      height: 15px;
+      margin-left: 15px;
+    }
+  }
+
+  span {
+    &.value {
+      white-space: nowrap;
+      width: 100%;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 0.9em;
+    }
+  }
+}
+
+.Mobile {
+  .Header {
+    .content {
+      .rightContent {
+        .UserAffiliateBox {
+          max-width: 200px;
+        }
+      }
+    }
+  }
+}

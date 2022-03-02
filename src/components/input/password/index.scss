@@ -1,0 +1,31 @@
+@import "../../../module.variables.scss";
+
+.InputPassword_ToggleVisible {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $inputHeight;
+    width: 50px;
+    top: 0px;
+    right: 0;
+    cursor: pointer;
+    opacity: 0.5;
+
+    svg {
+        height: 15px;
+
+        * {
+            fill: $grey;
+        }
+    }
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.InputPassword {
+    padding-right: 50px !important;
+    position: relative;
+}

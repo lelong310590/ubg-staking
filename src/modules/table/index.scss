@@ -1,0 +1,544 @@
+@import "../../module.variables.scss";
+
+.Table {
+  position: relative;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      background: rgba($color: $light, $alpha: 0.5);
+
+      th {
+        font-weight: 400;
+        color: $dark;
+        text-align: left;
+        padding: 0.71rem;
+        font-weight: 700;
+      }
+    }
+
+    th,
+    td {
+      padding: 0.5rem;
+      border: 1px solid $borderColor;
+    }
+
+    // ============================ Sort style ================================
+    .enableSort {
+      padding-right: 1.3rem;
+      position: relative;
+      cursor: pointer;
+
+      &:before,
+      &:after {
+        opacity: 0.3;
+        border: 4px solid transparent;
+        content: "";
+        display: block;
+        height: 0;
+        right: 0.4rem;
+        top: 50%;
+        position: absolute;
+        width: 0;
+      }
+
+      &:before {
+        border-bottom-color: $grey;
+        margin-top: -0.65rem;
+      }
+
+      &:after {
+        border-top-color: $grey;
+        margin-top: 0.15rem;
+      }
+
+      &.increase {
+        &:before,
+        &:after {
+          opacity: 1;
+        }
+
+        &:before {
+          opacity: 0.3;
+        }
+      }
+
+      &.descrease {
+        &:before,
+        &:after {
+          opacity: 1;
+        }
+
+        &:after {
+          opacity: 0.3;
+        }
+      }
+    }
+    // ============================ End Sort style ============================
+  }
+}
+
+.Table__Pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  margin-top: 0.71rem;
+
+  .wraper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 2.5rem;
+    width: 100%;
+
+    .left {
+      .total {
+        color: $grey;
+
+        .label {
+          font-weight: 500;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .btnPagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2.5rem;
+        width: 2.5rem;
+        border-radius: $borderRadius;
+        cursor: pointer;
+        border-color: rgba($color: $primary, $alpha: 0);
+        background: none;
+        outline: none;
+
+        svg {
+          height: 0.85rem;
+
+          * {
+            fill: $grey;
+          }
+        }
+
+        &:hover {
+          border: 1px solid $primary;
+
+          svg * {
+            fill: $primary;
+          }
+        }
+
+        &:disabled {
+          opacity: 0.3;
+          cursor: default;
+
+          &:hover {
+            border-color: rgba($color: $primary, $alpha: 0);
+
+            svg * {
+              fill: $grey;
+            }
+          }
+        }
+      }
+
+      .pageNumber {
+        color: $grey;
+        height: 2.14rem;
+        width: 3.6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .loading {
+        padding: 0 1rem;
+      }
+
+      form.formInputPageNumber {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $borderRadius;
+        border: 1px solid $primary;
+        overflow: hidden;
+        margin: 0 0.5rem;
+
+        input,
+        button {
+          height: 2.5rem;
+          border: none;
+        }
+
+        input {
+          padding: 0 0.5rem;
+          outline: none;
+          color: $dark;
+          width: 7rem;
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1em;
+          background: $primary;
+          color: $white;
+          padding: 0 1rem;
+          cursor: pointer;
+          user-select: none;
+        }
+      }
+    }
+  }
+}
+
+.Table__Message {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $borderRadius;
+  padding: 2.14rem;
+  color: $grey;
+
+  svg {
+    margin-right: 0.5rem;
+    height: 1.3rem;
+
+    path {
+      fill: $grey;
+    }
+  }
+}
+
+.Table__SearchBox {
+  margin-bottom: 0.71rem;
+
+  &.hasValue {
+    .input {
+      border-color: $primary !important;
+    }
+  }
+
+  .input {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.71rem 1rem;
+    border: 1px solid rgba($color: $borderColor, $alpha: 0);
+    transition: border 0.2s ease;
+    border: 1px solid $borderColor;
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.71rem;
+
+      svg {
+        height: 1rem;
+
+        * {
+          fill: $grey;
+        }
+      }
+    }
+
+    input {
+      outline: none;
+      border: none;
+      font-size: 1em;
+      color: $dark;
+      width: 28rem;
+      max-width: 100%;
+      background: transparent;
+
+      &::placeholder {
+        color: $grey;
+        font-weight: 300;
+      }
+    }
+
+    .btnClear {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0.71rem;
+      cursor: pointer;
+      opacity: 0.7;
+
+      svg {
+        height: 0.71rem;
+
+        * {
+          fill: $grey;
+        }
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .suggests {
+    margin-top: 1rem;
+    overflow: hidden;
+    border-radius: $borderRadius;
+    border: 1px solid $borderColor;
+
+    .item {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      cursor: pointer;
+      border-bottom: 1px solid $borderColor;
+
+      &.focused {
+        background: rgba($color: $primary, $alpha: 0.05);
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .TableMessage {
+    margin: 2.14rem 0;
+  }
+}
+
+.Table__Filter {
+  $minHeightFilterItem: 2.5rem;
+
+  &__Pannel {
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 500;
+      margin-right: 0.71rem;
+      margin-bottom: 0.71rem;
+      color: $grey;
+      transition: 0.2s ease;
+      border: 1px solid $borderColor;
+      min-height: $minHeightFilterItem;
+      padding: 0.5rem 0.71rem;
+      border-radius: $borderRadius;
+      position: relative;
+
+      svg {
+        height: 0.9rem;
+        margin-right: 0.71rem;
+
+        * {
+          fill: $grey;
+        }
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+
+      .qty {
+        margin-left: 0.5rem;
+        padding: 0.2rem 0.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $white;
+        background: $primary;
+        font-size: 0.8em;
+        font-weight: bold;
+        border-radius: $borderRadius;
+      }
+    }
+
+    .paramItem {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.5rem;
+      background: $grey;
+      color: $white;
+      padding: 0.5rem 0.71rem;
+      border-radius: $borderRadius;
+      margin-bottom: 0.71rem;
+      min-height: $minHeightFilterItem;
+
+      .btnRemove {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.5;
+        cursor: pointer;
+
+        svg {
+          height: 0.71rem;
+          margin-left: 0.71rem;
+
+          * {
+            fill: $white;
+          }
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__Popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($color: #000000, $alpha: 0.2);
+    z-index: $zIndexTableFilter;
+    padding: 1.4rem;
+    overflow: auto;
+
+    .content {
+      background: $white;
+      width: 50rem;
+      max-width: 100%;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 1rem;
+      border-radius: $borderRadius;
+
+      .head {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .title {
+          flex: 1;
+          width: 100%;
+          font-size: 1.4em;
+        }
+
+        .btnClose {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0.5;
+          cursor: pointer;
+
+          svg {
+            height: 1rem;
+
+            * {
+              fill: $dark;
+            }
+          }
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+
+      .list {
+        margin-bottom: 0.5rem;
+
+        .item {
+          margin-bottom: 1rem;
+
+          > .label {
+            margin-bottom: 0.4rem;
+            color: $grey;
+            font-size: 0.9em;
+          }
+        }
+      }
+
+      .btnActions {
+        button {
+          margin-right: 0.71rem;
+        }
+      }
+    }
+  }
+
+  &.panel {
+    .Table__Filter__Pannel {
+      border: 1px solid $borderColor;
+      padding: 0.71rem;
+      margin-bottom: 0.71rem;
+      padding-bottom: 0;
+
+      .button {
+        border: none;
+        padding: 0;
+        color: $dark;
+
+        svg * {
+          fill: $dark;
+        }
+      }
+    }
+
+    .panelList {
+      display: flex;
+      flex-wrap: wrap;
+
+      .item {
+        display: inline-flex;
+        flex-direction: column;
+        margin-right: 0.71rem;
+        margin-bottom: 0.71rem;
+
+        > .label {
+          margin-bottom: 0.4rem;
+        }
+
+        &.reset {
+          margin-right: 0;
+
+          > .label {
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.Table__Button {
+  background: $primary;
+  color: $white;
+  height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  padding: 0 2rem;
+  border-radius: $borderRadius;
+  font-size: 1rem;
+  font-weight: bold;
+
+  &.negative {
+    background: none;
+    border: 1px solid $grey;
+    color: $grey;
+  }
+}

@@ -1,0 +1,97 @@
+@import '../../../module.variables.scss';
+
+.InputCheckbox {
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-start;
+	cursor: pointer;
+	user-select: none;
+	opacity: 0.6;
+
+	.icon {
+		height: 18px;
+		width: 18px;
+		border-radius: 3px;
+		border: 1px solid $dark;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		box-sizing: border-box;
+
+		svg {
+			height: 8px !important;
+			opacity: 0;
+		}
+	}
+
+	.label {
+		margin-left: 5px;
+		font-size: 1em;
+		font-weight: 400;
+	}
+
+	&.checked {
+		opacity: 1;
+
+		.icon {
+			background: $success;
+			border-color: $success;
+
+			svg {
+				opacity: 1;
+
+				* {
+					fill: $white;
+				}
+			}
+		}
+	}
+
+	&.disabled {
+		opacity: 0.4;
+		cursor: default;
+		color: $grey;
+
+		&.checked {
+			.icon {
+				background: $grey;
+				border-color: $grey;
+
+				svg {
+					opacity: 1;
+					* {
+						fill: $white;
+					}
+				}
+			}
+		}
+	}
+
+	&.radio {
+		.icon {
+			position: relative;
+			border-radius: 50%;
+
+			svg {
+				visibility: hidden;
+			}
+		}
+
+		&.checked {
+			.icon {
+				&:before {
+					content: "";
+					display: inline-block;
+					position: absolute;
+					width: 6px;
+					height: 6px;
+					border-radius: 50%;
+					background: $white;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
+			}
+		}
+	}
+}

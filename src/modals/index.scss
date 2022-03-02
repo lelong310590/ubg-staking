@@ -1,0 +1,117 @@
+@import "../module.variables.scss";
+@import "./wallet";
+@import "./pool-detail";
+@import "./pool-deposit";
+
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($color: #000000, $alpha: 0.8);
+  z-index: $zIndexModal;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+
+  > .box {
+    box-shadow: 2px 3px 10px rgba($color: #000000, $alpha: 0.7);
+    border-radius: $borderRadius;
+    border: 1px solid $borderColor;
+    padding: 15px;
+    width: 500px;
+    height: max-content;
+    max-width: calc(100% - 30px);
+    border: none;
+    background: $white;
+
+    > .head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      background: $primary;
+      margin-top: -15px;
+      margin-right: -15px;
+      margin-left: -15px;
+      padding: 15px;
+      border-top-left-radius: $borderRadius;
+      border-top-right-radius: $borderRadius;
+
+      .title {
+        display: flex;
+        align-items: center;
+        color: $white;
+        font-size: 1.2em;
+        font-weight: 500;
+
+        svg {
+          height: 22px;
+          margin-right: 5px;
+
+          * {
+            fill: $white;
+          }
+        }
+      }
+
+      .btnClose {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 25px;
+        width: 45px;
+        cursor: pointer;
+
+        svg {
+          height: 15px;
+
+          * {
+            fill: $white;
+          }
+        }
+      }
+    }
+
+    button[type="submit"] {
+      width: 100%;
+    }
+  }
+}
+
+.ModalTabs {
+  display: flex;
+  align-items: center;
+  margin: 25px 0;
+
+  .item {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 25px;
+    color: $grey;
+    border-radius: $borderRadius;
+    border: 1px solid $borderColor;
+    margin-right: 10px;
+    cursor: pointer;
+
+    &.active {
+      color: $success;
+      border-color: $success;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .Modal {
+    padding-top: 15px;
+
+    > .box {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}

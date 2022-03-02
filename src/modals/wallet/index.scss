@@ -1,0 +1,28 @@
+@import "../../module.variables.scss";
+
+.ModalWallet {
+  .numberReports {
+    display: flex;
+    flex-wrap: wrap;
+
+    .item {
+      display: inline-flex;
+      flex-direction: column;
+      border: 1px solid $borderColor;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      padding: 10px;
+      border-radius: $borderRadius;
+
+      .label {
+        font-weight: 500;
+      }
+
+      .value {
+        font-weight: 700;
+        font-size: 1.2em;
+        color: $primary;
+      }
+    }
+  }
+}

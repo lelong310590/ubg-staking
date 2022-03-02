@@ -1,0 +1,175 @@
+@import "../../module.variables.scss";
+
+.Modal.ModalPoolDetail {
+  > .box {
+    width: 700px;
+    position: relative;
+
+    > .content {
+      padding: 5px;
+
+      .poolInfo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+
+        img {
+          width: 160px;
+          margin-right: 35px;
+        }
+
+        .content {
+          .name {
+            color: $primary;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 500;
+          }
+
+          table {
+            tbody {
+              tr {
+                td {
+                  padding-bottom: 10px;
+                  font-size: 1.1em;
+                }
+
+                td:first-child {
+                  color: $grey;
+                }
+
+                td:last-child {
+                  color: $dark;
+                  font-weight: 700;
+                  padding-left: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+      }
+
+      .form {
+        padding: 20px;
+        border-radius: $borderRadius;
+
+        .numberReports {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-bottom: 25px;
+
+          .item {
+            text-align: center;
+            border: 1px solid rgba($color: $primary, $alpha: 1);
+            padding: 10px;
+            border-radius: $borderRadius;
+            background: transparent;
+            position: relative;
+            min-width: 220px;
+            margin: 0 10px;
+            color: $primary;
+
+            .label {
+              margin-bottom: 5px;
+            }
+
+            .value {
+              font-weight: 500;
+              font-size: 1.4em;
+            }
+          }
+
+          &.claim {
+            .item {
+              color: $warning;
+              border-color: $warning;
+            }
+
+            &.disabled {
+              .item {
+                border-color: $grey;
+                color: $grey;
+              }
+            }
+          }
+        }
+
+        .ctas {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .Button {
+            padding: 0 45px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.Mobile {
+  .Modal.ModalPoolDetail {
+    > .box {
+      > .content {
+        .poolInfo {
+          img {
+            display: none;
+            width: 50px;
+            height: 150px;
+            object-fit: contain;
+          }
+
+          .content {
+            width: 100%;
+
+            .name {
+              font-size: 1.2em;
+            }
+
+            table {
+              width: 100%;
+
+              tbody {
+                tr {
+                  td,
+                  th {
+                    font-size: 1em;
+                  }
+
+                  td:last-child {
+                    text-align: right;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .form {
+          padding: 0;
+
+          .numberReports {
+            margin-bottom: 15px;
+          }
+
+          .col-sm-6 {
+            margin-bottom: 40px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

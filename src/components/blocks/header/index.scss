@@ -1,0 +1,94 @@
+@import "../../../module.variables.scss";
+
+.Header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: $primary;
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0px;
+
+    img.logo {
+      height: 40px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+
+      a {
+        text-decoration: none;
+      }
+
+      .item {
+        padding: 0 30px;
+        font-weight: 500;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-decoration: none;
+        color: rgba($color: $white, $alpha: 0.8);
+
+        &:hover {
+          color: $white;
+        }
+
+        &.active {
+          color: $primary;
+          background-color: $white;
+          border-radius: 150px;
+          cursor: default;
+        }
+      }
+    }
+
+    .rightContent {
+      display: flex;
+
+      .UserAffiliateBox {
+        max-width: 250px;
+        margin-right: 5px;
+        border-color: rgba($color: $white, $alpha: 0.5);
+
+        span.icon {
+          svg {
+            * {
+              fill: $white;
+            }
+          }
+        }
+
+        span.btnCopy {
+          svg {
+            * {
+              fill: $white;
+            }
+          }
+        }
+
+        span {
+          &.value {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.Mobile {
+  .Header {
+    .nav {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@import "../../../module.variables.scss";
+
+footer.Footer {
+  background: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  flex-direction: column;
+
+  .logo {
+    margin-bottom: 15px;
+
+    img {
+      height: 40px;
+    }
+  }
+
+  .social {
+    display: flex;
+    align-items: center;
+
+    a {
+      margin: 0 15px;
+      opacity: 0.8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: $white;
+      text-decoration: none;
+      width: 150px;
+
+      span.label {
+        margin-top: 0.3rem;
+        font-size: 0.8rem;
+      }
+
+      svg {
+        height: 38px;
+
+        * {
+          fill: $white;
+        }
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
