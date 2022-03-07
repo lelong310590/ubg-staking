@@ -10,6 +10,7 @@ import { InputTagSelect } from '../../../components/input/tag-select'
 import { DateTimeUtils, InputWraper, NumberUtils, useForm } from '../../../modules'
 import { AppService, ESMCStatus, SmcService } from '../../../services'
 import { StakePackage, StakingService, UserStake } from '../../../services/staking'
+import { StakingServiceV2 } from '../../../services/staking/stakingv2.service'
 
 export const SectionBank: FC = () => {
   return (
@@ -158,9 +159,18 @@ const Form: FC = () => {
       .catch(() => false);
   }
 
+  const fetchPackagesV2 = async () => {
+    return StakingServiceV2.fetchPackages()
+      .then(res => setPackages(res))
+      .catch(() => false);
+  }
+
+
   const initialize = async () => {
     await fetchTime();
-    await fetchPackages();
+    // TODO: uncomment it when go to v1
+    // await fetchPackages();
+    await fetchPackagesV2();
     setIsFetched(true);
   }
 

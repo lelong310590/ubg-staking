@@ -31,6 +31,9 @@ export class SmcService {
 
   static contractUBGToken: Contract;
 
+  static contractStakingV2: Contract;
+  static contractFarmingV2: Contract;
+
 
   static async initialize(store: Store): Promise<any> {
     if (this.isInitialized) return;
@@ -43,10 +46,9 @@ export class SmcService {
       // Events
       ethereum.on('accountsChanged', () => window.location.reload());
       ethereum.on('chainChanged', () => window.location.reload());
-
       // Load config in
       if (getEnv('ENV') === 'production') this.configs = contracts.production
-      else this.configs = contracts.production;
+      else this.configs = contracts.development;
 
       this.web3 = new Web3(ethereum);
 
@@ -96,6 +98,12 @@ export class SmcService {
       this.contractUBGToken = new this.web3.eth.Contract(this.configs['SMC_UBG_TOKEN_ABI'], this.configs['SMC_UBG_TOKEN_ADDRESS'], { from: this.address }) as any;
       this.contractUBGToken._name = 'UBG Token';
       this.contractUBGToken._decimals = await this.contractUBGToken.methods.decimals().call().then(res => +res);
+
+      this.contractStakingV2 = new this.web3.eth.Contract(this.configs['SMC_STAKING_V2_ABI'], this.configs['SMC_STAKING_V2_ADDRESS'], { from: this.address }) as any;
+      this.contractStakingV2._name = 'StakingV2';
+
+      this.contractFarmingV2 = new this.web3.eth.Contract(this.configs['SMC_FARMING_V2_ABI'], this.configs['SMC_FARMING_V2_ADDRESS'], { from: this.address }) as any;
+      this.contractFarmingV2._name = 'FarmingV2';
 
       // Check network
       this.chainId = `${ethereum.networkVersion}`;
