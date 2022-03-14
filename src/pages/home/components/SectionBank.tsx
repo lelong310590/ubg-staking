@@ -328,8 +328,10 @@ const Form: FC = () => {
 													if (smc.error) return
 													if (smc.status === ESMCStatus.NONE) return;
 													if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => SmcService.handleConnectWallet()} />
-													const isClaimActive = currentTime + 15552000000 >= endDate.getTime();
-													return <Button label="Claim" isLoading={isClaiming} onClick={() => handleClaim(s.id)} disabled={!isClaimActive} />;
+													// const isClaimActive = currentTime + 15552000000 >= endDate.getTime();
+													// return <Button label="Claim" isLoading={isClaiming} onClick={() => handleClaim(s.id)} disabled={!isClaimActive} 
+
+													return <Button label="Claim" isLoading={isClaiming} onClick={() => handleClaim(s.id)}/>;
 												}()}
 												</div>
 											</div>
