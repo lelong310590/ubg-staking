@@ -1,2 +1,2 @@
-## UBG Farm Client
-### Ver 1
+## UBG Staking Client
+### Ver 2

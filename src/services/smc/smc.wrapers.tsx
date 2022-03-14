@@ -18,7 +18,7 @@ export const withSmcWalletWraper = (Component: FC<any>) => (props: any) => {
 
     if (!address) return <div className="SMCWraper">
       <img src="/images/meta-mask-logo.png" alt="" className="logo" />
-      <div className="title">Your wallet must be connect with UBG Farm.</div>
+      <div className="title">Your wallet must be connect with UBG Staking.</div>
       <Button label="Connect wallet" onClick={() => SmcService.handleConnectWallet()} />
     </div>
 
