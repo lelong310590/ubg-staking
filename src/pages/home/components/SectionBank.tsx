@@ -9,8 +9,7 @@ import { Button, Icon, InputNumber, Message } from '../../../components'
 import { InputTagSelect } from '../../../components/input/tag-select'
 import { DateTimeUtils, InputWraper, NumberUtils, useForm } from '../../../modules'
 import { AppService, ESMCStatus, SmcService } from '../../../services'
-import { StakePackage, UserStake } from '../../../services/staking'
-import { StakingServiceV2 } from '../../../services/staking/stakingv2.service'
+import { StakingServiceV2, StakePackage, UserStake } from '../../../services/staking/stakingv2.service'
 import _ from 'lodash';
 
 export const SectionBank: FC = () => {
@@ -237,7 +236,7 @@ const Form: FC = () => {
 							Loading...
 						</div>
 
-						const packageActive = packages.find(v => v.id === values.packageId) as StakingServiceV2;
+						const packageActive = packages.find(v => v.id === values.packageId) as StakePackage;
 						//const reward = values.amount ? (values.amount * packageActive.interest) / 100 : 0;
 						const reward = values.amount ? (packageActive.interest / 10000 + 1) * values.amount : 0;
 
@@ -270,18 +269,18 @@ const Form: FC = () => {
 					</div>
 				</form>
 			</div>
-			
-			<div className="user-stake-wrapper">
-				<div className="main-title text-center">Your UBG's saving information</div>
-				{!_.isEmpty(userStake) &&
+			{!_.isEmpty(userStake) &&
+				<div className="user-stake-wrapper">
+					<div className="main-title text-center">Your UBG's saving information</div>
+				
 					<div className="row">
 						{_.map(userStake, (s, i) => {
 							const currentTime = new Date().getTime()
 							
  							let reward = (s.interest / 10000 + 1) * s.amount;
 							let timestamp = s.startTime*1000
-							let date = new Date(parseInt(timestamp));
-							let endDate = new Date(parseInt(timestamp + s.duration*1000));
+							let date = new Date(timestamp);
+							let endDate = new Date(timestamp + s.duration*1000);
 
 							let showDate = date.getDate()+
 							"/"+(date.getMonth()+1)+
@@ -303,7 +302,7 @@ const Form: FC = () => {
 							return (
 								<Fragment>
 									{s.amount > 0 && 
-										<div className="col-12 col-md-3" index={i}>
+										<div className="col-12 col-md-3">
 											<div className="user-stake-item">
 												<img src="./images/pool.png" alt="" className="img-fluid" />
 												<div className="stake-infomation">
@@ -329,7 +328,7 @@ const Form: FC = () => {
 													if (smc.error) return
 													if (smc.status === ESMCStatus.NONE) return;
 													if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => SmcService.handleConnectWallet()} />
-													const isClaimActive = currentTime >= endDate.getTime();
+													const isClaimActive = currentTime + 15552000000 >= endDate.getTime();
 													return <Button label="Claim" isLoading={isClaiming} onClick={() => handleClaim(s.id)} disabled={!isClaimActive} />;
 												}()}
 												</div>
@@ -342,33 +341,8 @@ const Form: FC = () => {
 						})}
 						
 					</div>
-					// <div className="UserStake">
-					// 	<div className="title">UBG's saving information</div>
-
-					// 	<div className="content">
-					// 		<div className="rowInfo">
-					// 			<div className="label">Saving</div>
-					// 			<div className="value">{userStake.initial.toLocaleString(getLocaleKey(true), { maximumFractionDigits: 2 })} UBG</div>
-					// 		</div>
-					// 		<div className="rowInfo">
-					// 			<div className="label">Reward</div>
-					// 			<div className="value">{userStake.reward.toLocaleString(getLocaleKey(true), { maximumFractionDigits: 2 })} UBG</div>
-					// 		</div>
-					// 		<div className="rowInfo">
-					// 			<div className="label">Start Day</div>
-					// 			<div className="value">{DateTimeUtils.formatToShow(userStake.startAt, true, getLocaleKey(true))}</div>
-					// 		</div>
-					// 		<div className="rowInfo">
-					// 			<div className="label">Pay Day</div>
-					// 			<div className="value">
-					// 				<p>{DateTimeUtils.formatToShow(userStake.payAt, true, getLocaleKey(true))}</p>
-					// 				<p className="time">{countDownShow(userStake.payAt, new Date(now))}</p>
-					// 			</div>
-					// 		</div>
-					// 	</div>
-					// </div>
-				}
-			</div>
+				</div>
+			}
 			
 		</Fragment>
 	)

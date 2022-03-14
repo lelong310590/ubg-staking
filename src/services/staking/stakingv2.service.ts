@@ -1,4 +1,3 @@
-import { NumberUtils } from "../../modules";
 import { SmcService } from "../smc";
 
 export class StakingServiceV2 {
