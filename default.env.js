@@ -2,7 +2,7 @@ const DefaultEnvs = {
   // General information
   ENV: 'local', // Important
   APP_NAME: 'UBG Staking V2',
-  PUBLIC_URL: 'http://localhost:4000', // Important
+  PUBLIC_URL: 'https://staking-v2.ubgtoken.com', // Important
   LOCALE_DEFAULT: 'en_US',
 
   // Meta tag for SEO
