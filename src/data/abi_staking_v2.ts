@@ -276,6 +276,19 @@ export const abi_staking_v2 = [
     type: "event",
   },
   {
+    inputs: [],
+    name: "_getBlockTimestamp",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -540,6 +553,87 @@ export const abi_staking_v2 = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "userAddress",
+        type: "address",
+      },
+    ],
+    name: "getStakingData",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "id",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "owner",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "startTime",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "interest",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "duration",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "payCommissionImmediately",
+            type: "bool",
+          },
+          {
+            internalType: "uint256",
+            name: "commission1",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "commission2",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "commission3",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "commission4",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "commission5",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct StakingData[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "getUbgBalance",
     outputs: [
@@ -617,6 +711,19 @@ export const abi_staking_v2 = [
   },
   {
     inputs: [],
+    name: "name",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "owedCommissionAmount",
     outputs: [
       {
@@ -685,6 +792,19 @@ export const abi_staking_v2 = [
     name: "seekTime",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "seekedTime",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
