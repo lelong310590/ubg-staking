@@ -195,7 +195,7 @@ const Form: FC = () => {
 
 
 	const handleClaim = async (packageId) => {
-		setIsClaiming(true);
+		//setIsClaiming(true);
 
 		await SmcService.send({
 			contract: SmcService.contractStakingV2,
@@ -210,7 +210,7 @@ const Form: FC = () => {
 				SmcService.transactionErrorAlert(err, 'Claim failed.');
 			})
 
-		setIsClaiming(false);
+		//setIsClaiming(false);
 	}
 
 	return (
@@ -331,7 +331,7 @@ const Form: FC = () => {
 													// const isClaimActive = currentTime + 15552000000 >= endDate.getTime();
 													// return <Button label="Claim" isLoading={isClaiming} onClick={() => handleClaim(s.id)} disabled={!isClaimActive} 
 
-													return <Button label="Claim" isLoading={isClaiming} onClick={() => handleClaim(s.id)}/>;
+													return <Button label="Claim" onClick={() => handleClaim(s.id)}/>;
 												}()}
 												</div>
 											</div>
