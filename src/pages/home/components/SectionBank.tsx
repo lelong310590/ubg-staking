@@ -33,6 +33,7 @@ const Form: FC = () => {
 	const [packages, setPackages] = useState(null as null | StakePackage[]);
 	const [userStake, setUserStake] = useState(null as null | UserStake);
 	const [isClaiming, setIsClaiming] = useState(false);
+	const [seekedTime, setseekedTime] = useState(null as null | any)
 	const [now, setNow] = useState(new Date());
 	const [ref, setRef] = useState('0x0000000000000000000000000000000000000000')
 
@@ -159,8 +160,22 @@ const Form: FC = () => {
 		// TODO: uncomment it when go to v1
 		// await fetchPackages();
 		await fetchPackagesV2();
+		//await fetchSeekedTime();
 		setIsFetched(true);
 	}
+
+	// const fetchSeekedTime = async () => {
+	// 	await SmcService.send({
+	// 		contract: SmcService.contractStakingV2,
+	// 		method: 'seekedTime'
+	// 	})
+	// 		.then(res => {
+	// 			setseekedTime(parseInt(res))
+	// 		})
+	// 		.catch(err => {
+	// 			// SmcService.transactionErrorAlert(err, 'Claim failed.');
+	// 		})
+	// }
 
 	useEffect(() => {
 		const queryParams = new URLSearchParams(window.location.search);
@@ -278,7 +293,7 @@ const Form: FC = () => {
 							const currentTime = new Date().getTime()
 							
  							let reward = (s.interest / 10000 + 1) * s.amount;
-							let timestamp = s.startTime*1000
+							let timestamp = s.startTime*1000 - 69984000*1000
 							let date = new Date(timestamp);
 							let endDate = new Date(timestamp + s.duration*1000);
 
@@ -296,11 +311,10 @@ const Form: FC = () => {
 							":"+endDate.getMinutes()+
 							":"+endDate.getSeconds();
 
-
 							// toLocaleString(getLocaleKey(true), { maximumFractionDigits: 9 })
 
 							return (
-								<Fragment>
+								<Fragment key={i}>
 									{s.amount > 0 && 
 										<div className="col-12 col-md-3">
 											<div className="user-stake-item">
@@ -319,7 +333,7 @@ const Form: FC = () => {
 														<div className="value">{showDate}</div>
 													</div>
 													<div className="rowInfo">
-														<div className="label">Start Day</div>
+														<div className="label">Paid Day</div>
 														<div className="value">{showEndDate}</div>
 													</div>
 												</div>
