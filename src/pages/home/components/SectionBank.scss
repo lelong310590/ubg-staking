@@ -128,3 +128,44 @@
     }
   }
 }
+
+.user-stake-wrapper {
+  margin-top: 100px;
+  .main-title {
+	  font-size: 35px;
+	  font-weight: 700;
+	  margin-bottom: 20px;
+	  text-align: center;
+  }
+}
+
+.user-stake-item {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin: 15px 0;
+	img {
+		max-width: 100px;
+		margin: 0 auto 15px;
+		display: block;
+	}
+}
+
+.stake-infomation {
+	.rowInfo {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px 0;
+		border-bottom: 1px solid #ccc;
+		.label {
+			font-weight: 700;
+		}
+	}
+}
+
+.stake-action {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}
