@@ -119,7 +119,6 @@ const Form: FC = () => {
 				setBalance(+NumberUtils.cryptoConvert('decode', +res, SmcService.contractUBGToken._decimals));
 			})
 			.catch((err) => {
-				console.log('err fetchUserBalance: ', err)
 				return false;
 			});
 	}
@@ -132,12 +131,6 @@ const Form: FC = () => {
 			.then(res => {
 				console.log('getMyStakingData: ', res)
 				setUserStake(res)
-				// setUserStake({
-				// 	initial: +NumberUtils.cryptoConvert('decode', +res.initial, SmcService.contractUBGToken._decimals),
-				// 	reward: +NumberUtils.cryptoConvert('decode', +res.reward, SmcService.contractUBGToken._decimals),
-				// 	payAt: new Date(+res.payday * 1000),
-				// 	startAt: new Date(+res.startday * 1000)
-				// })
 			})
 			.catch(() => false);
 	}
@@ -187,9 +180,9 @@ const Form: FC = () => {
 
 		if (smc.status !== ESMCStatus.NONE) {
 			initialize();
-			interval = setIntervalAsync(async () => {
-				await fetchTime();
-			}, 1000);
+			// interval = setIntervalAsync(async () => {
+			// 	await fetchTime();
+			// }, 1000);
 		}
 
 		if (smc.status === ESMCStatus.READY) {
@@ -226,6 +219,12 @@ const Form: FC = () => {
 			})
 
 		//setIsClaiming(false);
+	}
+
+	const showTitle = () => {
+		return (
+			<div className="main-title text-center">UBG's saving information</div>
+		)
 	}
 
 	return (
@@ -275,10 +274,7 @@ const Form: FC = () => {
 							if (smc.error) return
 							if (smc.status === ESMCStatus.NONE) return;
 							if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => SmcService.handleConnectWallet()} />
-							// if (userStake) {
-							// 	const isClaimActive = new Date(now).getTime() >= new Date(userStake.payAt).getTime();
-							// 	return <Button label="Claim" isLoading={isClaiming} onClick={handleClaim(1)} disabled={!isClaimActive} />;
-							// }
+							
 							return <Button isLoading={isSubmitting} type="submit" label="Stake" />
 						}()}
 					</div>
@@ -286,8 +282,9 @@ const Form: FC = () => {
 			</div>
 			{!_.isEmpty(userStake) &&
 				<div className="user-stake-wrapper">
-					<div className="main-title text-center">Your UBG's saving information</div>
-				
+					
+					{showTitle()}
+
 					<div className="row">
 						{_.map(userStake, (s, i) => {
 							const currentTime = new Date().getTime()
@@ -342,10 +339,8 @@ const Form: FC = () => {
 													if (smc.error) return
 													if (smc.status === ESMCStatus.NONE) return;
 													if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => SmcService.handleConnectWallet()} />
-													// const isClaimActive = currentTime + 15552000000 >= endDate.getTime();
-													// return <Button label="Claim" isLoading={isClaiming} onClick={() => handleClaim(s.id)} disabled={!isClaimActive} 
-
-													return <Button label="Claim" onClick={() => handleClaim(s.id)}/>;
+													const isClaimActive = currentTime  >= endDate.getTime();
+													return <Button label="Claim" isLoading={isClaiming} onClick={() => handleClaim(s.id)} disabled={!isClaimActive} />;
 												}()}
 												</div>
 											</div>
