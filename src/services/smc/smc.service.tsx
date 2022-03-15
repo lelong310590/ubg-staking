@@ -350,6 +350,7 @@ export class SmcService {
         ...args: any
     ): Promise<any> {
         return new Promise(async (resolve, reject) => {
+            console.log("options", options);
             const func = options.contract.methods[options.method] as any;
             if (typeof func !== "function")
                 reject(

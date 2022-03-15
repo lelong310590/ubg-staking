@@ -402,6 +402,25 @@ export const abi_staking_v2 = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "comissionAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "getMyStakingData",
     outputs: [
@@ -839,6 +858,19 @@ export const abi_staking_v2 = [
   {
     inputs: [],
     name: "stakingAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "stakingUsers",
     outputs: [
       {
         internalType: "uint256",

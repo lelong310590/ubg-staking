@@ -21,8 +21,10 @@ export const SectionHead: FC = () => {
 
 		// Todo
 		// interval = setIntervalAsync(async () => {
-		fetchTotalStakingAmount();
-		fetchTotalPaidAmount();
+		setTimeout(()=>{
+			fetchTotalStakingAmount();
+			fetchTotalPaidAmount();
+		}, 3000);
 		// }, 1000);
 
 		// interval2 = setIntervalAsync(async () => {
