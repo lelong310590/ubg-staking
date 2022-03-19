@@ -72,78 +72,7 @@ export class SmcService {
 
             this.web3 = new Web3(ethereum);
 
-            // Contracts
-            const contractMAIN = new this.web3.eth.Contract(
-                this.configs["SMC_MAIN_ABI"],
-                this.configs["SMC_MAIN_ADDRESS"]
-            );
-            const contractUSDT = new this.web3.eth.Contract(
-                this.configs["SMC_USDT_ABI"],
-                this.configs["SMC_USDT_ADDRESS"]
-            );
-
-            this.contractIDO = new this.web3.eth.Contract(
-                this.configs["SMC_IDO_ABI"],
-                this.configs["SMC_IDO_ADDRESS"],
-                {from: this.address}
-            ) as any;
-            this.contractIDOToken = new this.web3.eth.Contract(
-                this.configs["SMC_IDO_TOKEN_ABI"],
-                this.configs["SMC_IDO_TOKEN_ADDRESS"],
-                {from: this.address}
-            ) as any;
-
-            this.contractMAIN = {
-                poolInfo: (pid) =>
-                    contractMAIN.methods.poolInfo(pid).call({from: this.address}),
-                userPoolInfo: async (pid) => {
-                    const pendingReward = await contractMAIN.methods
-                        .pendingReward(pid, this.address)
-                        .call();
-                    return contractMAIN.methods
-                        .userInfo(pid, this.address)
-                        .call()
-                        .then((res: any) => ({
-                            amount: +res.amount / 1000000,
-                            lastUnlockBlock: +res.lastUnlockBlock,
-                            lockAmount: +res.lockAmount / 1000000,
-                            rewardDebt: +res.rewardDebt / 1000000000000000000,
-                            rewardDebtAtBlock: +res.rewardDebtAtBlock,
-                            pendingReward: +pendingReward / 1000000000000000000,
-                        }));
-                },
-                deposit: (pid, amountUSDT) =>
-                    contractMAIN.methods
-                        .deposit(
-                            pid,
-                            NumberUtils.cryptoConvertToStringAmount(amountUSDT, 6),
-                            this.getRefCode()
-                        )
-                        .send({from: this.address}),
-                claimReward: (pid) =>
-                    contractMAIN.methods.claimReward(pid).send({from: this.address}),
-            };
-
-            this.contractUSDT = {
-                balanceOf: () =>
-                    contractUSDT.methods
-                        .balanceOf(this.address)
-                        .call({from: this.address})
-                        .then((value: any) => +value / 1000000),
-                approve: (amount) =>
-                    contractUSDT.methods
-                        .approve(
-                            this.configs["SMC_MAIN_ADDRESS"],
-                            NumberUtils.cryptoConvertToStringAmount(amount, 6)
-                        )
-                        .send({from: this.address}),
-                allowance: () =>
-                    contractUSDT.methods
-                        .allowance(this.address, this.configs["SMC_MAIN_ADDRESS"])
-                        .call({from: this.address})
-                        .then((value: any) => +value / 1000000),
-            };
-
+            // Contract
             this.contractStaking = new this.web3.eth.Contract(
                 this.configs["SMC_STAKING_ABI"],
                 this.configs["SMC_STAKING_ADDRESS"],
@@ -365,6 +294,8 @@ export class SmcService {
                     .call({'from': this.address != null ? this.address : ''})
                     .then((res: any) => resolve(res))
                     .catch((error: any) => {
+                        console.log("contract", options.contract);
+                        console.log("method", options.method);
                         console.error(error);
                         setTimeout(action, 2000);
                     });

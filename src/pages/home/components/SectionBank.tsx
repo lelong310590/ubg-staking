@@ -103,7 +103,7 @@ const Form: FC = () => {
 	const fetchTime = async () => {
 		return SmcService.call({
 			contract: SmcService.contractStaking,
-			method: 'getNow'
+			method: '_getBlockchainTimestamp'
 		})
 			.then(res => {
 				setNow(new Date(+res * 1000));
@@ -150,7 +150,7 @@ const Form: FC = () => {
 
 
 	const initialize = async () => {
-		await fetchTime();
+		// await fetchTime();
 		// TODO: uncomment it when go to v1
 		// await fetchPackages();
 		await fetchPackagesV2();
