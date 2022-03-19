@@ -1,6 +1,6 @@
 const DefaultEnvs = {
   // General information
-  ENV: 'local', // Important
+  ENV: 'production', // Important
   APP_NAME: 'UBG Staking V2',
   PUBLIC_URL: 'https://staking-v2.ubgtoken.com', // Important
   LOCALE_DEFAULT: 'en_US',
