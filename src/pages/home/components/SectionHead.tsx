@@ -20,9 +20,12 @@ export const SectionHead: FC = () => {
 		let interval2: any;
 
 		// Todo
-		interval = setIntervalAsync(async () => {
-			await fetchTotalStakingAmount();
-		}, 1000);
+		// interval = setIntervalAsync(async () => {
+		setTimeout(()=>{
+			fetchTotalStakingAmount();
+			fetchTotalPaidAmount();
+		}, 3000);
+		// }, 1000);
 
 		// interval2 = setIntervalAsync(async () => {
 		// 	await fetchTotalPaidAmount();
@@ -32,10 +35,10 @@ export const SectionHead: FC = () => {
 	const fetchTotalStakingAmount = async () => {
 		return SmcService.call({
 			contract: SmcService.contractStakingV2,
-			method: 'totalPaidAmount'
+			method: 'stakingAmount'
 		})
 			.then(res => {
-				console.log('totalPaidAmount: ', res)
+				console.log('stakingAmount: ', res)
 			})
 			.catch(() => false);
 	}
@@ -46,7 +49,7 @@ export const SectionHead: FC = () => {
 			method: 'totalPaidAmount',
 		})
 			.then(res => {
-				setTotalPaidAmount(res)
+				console.log('totalPaidAmount: ', res)
 			})
 			.catch((err) => {
 				return false;
