@@ -1172,9 +1172,12 @@ export const contracts: {
   production: ContractConfig;
 } = {
   development: {
-    SMC_DOMAIN_URL: "https://testnet.bscscan.com",
-    SMC_NETWORK_NAME: "BSC Testnet",
-    SMC_NETWORK_CHAIN_ID: "97",
+    // SMC_DOMAIN_URL: "https://testnet.bscscan.com",
+    // SMC_NETWORK_NAME: "BSC Testnet",
+    // SMC_NETWORK_CHAIN_ID: "97",
+    "SMC_DOMAIN_URL": "https://bscscan.com",
+    "SMC_NETWORK_NAME": "BSC Mainnet",
+    "SMC_NETWORK_CHAIN_ID": "56",
     SMC_ROOT_ADDRESS: "0x0000000000000000000000000000000000000000",
     SMC_IDO_ADDRESS: "0xE2A199edE909F1eD57F640D7670F61a2cE8d9922",
     SMC_IDO_TOKEN_ADDRESS: "0x8a5294b43d345ee20563f756f13e24e44429bdc0",
