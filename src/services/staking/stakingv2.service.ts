@@ -3,7 +3,7 @@ import { SmcService } from "../smc";
 export class StakingServiceV2 {
 	static async fetchPackages(): Promise<StakePackage[]> {
 		const packages = await Promise.all(
-			["1", "2", "3"].map(async (value, index) => {
+			["1", "3", "4", "5"].map(async (value, index) => {
 				const packageRes = await SmcService.call(
 					{
 						contract: SmcService.contractStakingV2,
@@ -11,7 +11,7 @@ export class StakingServiceV2 {
 					},
 					value
 				);
-
+				
 				const data: StakePackage = {
 					id: `${value}`,
 					name: packageRes.duration / 86400 + ' days',
@@ -20,7 +20,7 @@ export class StakingServiceV2 {
 					numberOfDays: +packageRes.duration / 86400,
 				  };
 		
-				  return data;
+				return data;
 			})
 		);
 

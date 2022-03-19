@@ -144,7 +144,9 @@ const Form: FC = () => {
 
 	const fetchPackagesV2 = async () => {
 		return StakingServiceV2.fetchPackages()
-			.then(res => setPackages(res))
+			.then((res) => {
+				setPackages(res)
+			})
 			.catch(() => false);
 	}
 
