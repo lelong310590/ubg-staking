@@ -39,6 +39,7 @@ export const SectionHead: FC = () => {
 		})
 			.then(res => {
 				console.log('stakingAmount: ', res)
+				setTotalStakingAmount(+NumberUtils.cryptoConvert('decode', +res, SmcService.contractUBGToken._decimals))
 			})
 			.catch(() => false);
 	}
@@ -50,6 +51,7 @@ export const SectionHead: FC = () => {
 		})
 			.then(res => {
 				console.log('totalPaidAmount: ', res)
+				setTotalPaidAmount(+NumberUtils.cryptoConvert('decode', +res, SmcService.contractUBGToken._decimals))
 			})
 			.catch((err) => {
 				return false;

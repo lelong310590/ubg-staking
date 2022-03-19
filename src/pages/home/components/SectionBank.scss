@@ -1,142 +1,143 @@
 @import "../../../module.variables.scss";
 
 .HomePage {
-  .SectionBank {
-    background: #f8f9ff;
-
-    .block {
-      @include flexBox;
-      margin-bottom: 1.5rem;
-    }
-
-    .sectionTitle,
-    .sectionExcerpt {
-      text-align: center;
-    }
-
-    .numberReports {
-      .item {
-        text-align: center;
-        border: 1px solid $borderColor;
-        padding: 15px;
-        border-radius: $borderRadius;
-        background: transparent;
-        position: relative;
-        margin-bottom: 20px;
-        background: $white;
-
-        .label {
-          color: $grey;
-          margin-bottom: 5px;
-        }
-
-        .value {
-          font-weight: 500;
-          color: $primary;
-          font-size: 1.4em;
-        }
-      }
-    }
-
-    form {
-      border: 1px solid $primary;
-      padding: 20px;
-      border-radius: $borderRadius;
-      box-shadow: 0px 0px 15px rgba($color: $primary, $alpha: 0.5);
-      margin: 0 20px;
-      background: $white;
-
-      > .head {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-
-        .title {
-          font-size: 1.4em;
-          color: $primary;
-          font-weight: 500;
-        }
-      }
-
-      .InputWraper {
-        &.hideBorder {
-          .input {
-            border: none;
-          }
-        }
-
-        .input {
-          width: 100%;
-        }
-      }
-
-      .note {
-        margin-bottom: 1rem;
-        text-align: center;
-      }
-
-      .cta {
-        text-align: center;
-      }
-    }
-
-    .UserStake {
-      .title {
-        font-size: 1.2rem;
-        padding-bottom: 1rem;
-      }
-
-      .content {
-        border-top: 1px solid rgba($color: #000000, $alpha: 0.1);
-        border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
-        padding: 0.7rem 0;
-        margin-bottom: 1rem;
-
-        .rowInfo {
-          padding: 0.8rem 0;
-          display: flex;
-          justify-content: space-between;
-
-          .value {
-            font-weight: 500;
-            font-size: 1.1rem;
-            text-align: right;
-
-            .time {
-              font-size: 0.85rem;
-              color: $warning;
-            }
-          }
-        }
-      }
-    }
-  }
+	.SectionBank {
+		background: #f8f9ff;
+		
+		.block {
+			@include flexBox;
+			margin-bottom: 1.5rem;
+		}
+		
+		.sectionTitle,
+		.sectionExcerpt {
+			text-align: center;
+		}
+		
+		.numberReports {
+			.item {
+				text-align: center;
+				border: 1px solid $borderColor;
+				padding: 15px;
+				border-radius: $borderRadius;
+				background: transparent;
+				position: relative;
+				margin-bottom: 20px;
+				background: $white;
+				
+				.label {
+					color: $grey;
+					margin-bottom: 5px;
+				}
+				
+				.value {
+					font-weight: 500;
+					color: $primary;
+					font-size: 1.4em;
+				}
+			}
+		}
+		
+		form {
+			border: 1px solid $primary;
+			padding: 20px;
+			border-radius: $borderRadius;
+			box-shadow: 0px 0px 15px rgba($color: $primary, $alpha: 0.5);
+			margin: 0 20px;
+			background: $white;
+			
+			> .head {
+				display: flex;
+				justify-content: space-between;
+				margin-bottom: 15px;
+				
+				.title {
+					font-size: 1.4em;
+					color: $primary;
+					font-weight: 500;
+				}
+			}
+			
+			.InputWraper {
+				&.hideBorder {
+					.input {
+						border: none;
+					}
+				}
+				
+				.input {
+					width: 100%;
+				}
+			}
+			
+			.note {
+				margin-bottom: 1rem;
+				text-align: center;
+			}
+			
+			.cta {
+				text-align: center;
+			}
+		}
+		
+		.UserStake {
+			.title {
+				font-size: 1.2rem;
+				padding-bottom: 1rem;
+			}
+			
+			.content {
+				border-top: 1px solid rgba($color: #000000, $alpha: 0.1);
+				border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+				padding: 0.7rem 0;
+				margin-bottom: 1rem;
+				
+				.rowInfo {
+					padding: 0.8rem 0;
+					display: flex;
+					justify-content: space-between;
+					
+					.value {
+						font-weight: 500;
+						font-size: 1.1rem;
+						text-align: right;
+						
+						.time {
+							font-size: 0.85rem;
+							color: $warning;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 .Mobile {
-  .HomePage {
-    .SectionBank {
-      form {
-        > .head {
-          flex-direction: column;
-
-          .title {
-            margin-bottom: 15px;
-          }
-        }
-      }
-    }
-  }
+	.HomePage {
+		.SectionBank {
+			form {
+				> .head {
+					flex-direction: column;
+					
+					.title {
+						margin-bottom: 15px;
+					}
+				}
+			}
+		}
+	}
 }
 
 .user-stake-wrapper {
-  margin-top: 100px;
-  .main-title {
-	  font-size: 35px;
-	  font-weight: 700;
-	  margin-bottom: 20px;
-	  text-align: center;
-  }
+	margin-top: 100px;
+	
+	.main-title {
+		font-size: 35px;
+		font-weight: 700;
+		margin-bottom: 20px;
+		text-align: center;
+	}
 }
 
 .user-stake-item {
@@ -144,6 +145,7 @@
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	margin: 15px 0;
+	
 	img {
 		max-width: 100px;
 		margin: 0 auto 15px;
@@ -158,6 +160,7 @@
 		align-items: center;
 		padding: 10px 0;
 		border-bottom: 1px solid #ccc;
+		
 		.label {
 			font-weight: 700;
 		}
@@ -168,4 +171,10 @@
 	margin-top: 20px;
 	display: flex;
 	justify-content: center;
+}
+
+.stake-stats {
+	p {
+		margin-bottom: 20px;
+	}
 }
