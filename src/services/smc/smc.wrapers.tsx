@@ -12,6 +12,14 @@ export const withSmcWalletWraper = (Component: FC<any>) => (props: any) => {
     const Cpn = withSmcWraper(() => {
         const {address, isFetching, error} = useSelector(state => state.smcWallet);
 
+        if (isMobile) return (
+            <div className="SMCWraper">
+                <div className="smc-waller-list">
+                    <img src="/images/trust-logo.png" alt="" className="logo" onClick={() => openTrust()}/>
+                </div>
+            </div>
+        )
+
         if (isFetching) return <div className="SMCWraper">
             <Icon.Loading/>
         </div>
@@ -24,9 +32,6 @@ export const withSmcWalletWraper = (Component: FC<any>) => (props: any) => {
             <div className="SMCWraper">
                 <div className="smc-waller-list">
                     <img src="/images/meta-mask-logo.png" alt="" className="logo"/>
-                    {isMobile &&
-                        <img src="/images/trust-logo.png" alt="" className="logo" onClick={() => openTrust()}/>
-                    }
                 </div>
                 <div className="title">Your wallet must be connect with UBG Staking.</div>
                 <Button label="Connect wallet" onClick={() => SmcService.handleConnectWallet()}/>
