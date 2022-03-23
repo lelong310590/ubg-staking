@@ -33,6 +33,8 @@ import {
 } from "./ido.reducer";
 import {clearIntervalAsync, setIntervalAsync} from "set-interval-async/fixed";
 
+import {isMobile} from 'react-device-detect';
+
 export class SmcService {
     static isInitialized: boolean = false;
     static address: string;
@@ -60,7 +62,9 @@ export class SmcService {
         try {
             const {ethereum} = window as any;
             if (typeof ethereum === "undefined")
-                throw Error("META_MASK_NOT_INSTALLED");
+                if (!isMobile) {
+                    throw Error("META_MASK_NOT_INSTALLED");
+                }
             this.ethereum = ethereum;
 
             // Events
