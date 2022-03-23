@@ -34,6 +34,7 @@ import {
 import {clearIntervalAsync, setIntervalAsync} from "set-interval-async/fixed";
 
 import {isMobile} from 'react-device-detect';
+import {Message} from "../../components";
 
 export class SmcService {
     static isInitialized: boolean = false;
@@ -62,9 +63,7 @@ export class SmcService {
         try {
             const {ethereum} = window as any;
             if (typeof ethereum === "undefined")
-                if (!isMobile) {
-                    throw Error("META_MASK_NOT_INSTALLED");
-                }
+                throw Error("META_MASK_NOT_INSTALLED");
             this.ethereum = ethereum;
 
             // Events

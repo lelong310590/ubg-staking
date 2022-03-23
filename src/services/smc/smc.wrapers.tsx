@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, Fragment} from "react";
 import {useSelector} from "../../AppStores";
 import {Button, Icon, Message} from "../../components";
 import {SmcService} from "./smc.service";
@@ -11,14 +11,6 @@ const openTrust = () => {
 export const withSmcWalletWraper = (Component: FC<any>) => (props: any) => {
     const Cpn = withSmcWraper(() => {
         const {address, isFetching, error} = useSelector(state => state.smcWallet);
-
-        if (isMobile) return (
-            <div className="SMCWraper">
-                <div className="smc-waller-list">
-                    <img src="/images/trust-logo.png" alt="" className="logo" onClick={() => openTrust()}/>
-                </div>
-            </div>
-        )
 
         if (isFetching) return <div className="SMCWraper">
             <Icon.Loading/>
@@ -52,7 +44,16 @@ export const withSmcWraper = (Component: FC<any>) => (props: any) => {
     </div>
 
     if (status === 'ERROR') return <div className="SMCWraper">
-        <Message type="ERROR" content={error}/>
+        {isMobile ? (
+            <Fragment>
+                <div className="smc-waller-list">
+                    <img src="/images/trust-logo.png" alt="" className="logo" onClick={() => openTrust()}/>
+                </div>
+                <div className="title">Your wallet must be connect with UBG Staking.</div>
+            </Fragment>
+        ) : (
+            <Message type="ERROR" content={error}/>
+        )}
     </div>
 
     if (status === 'META_MASK_NOT_INSTALLED') return <div className="SMCWraper">
