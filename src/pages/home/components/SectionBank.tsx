@@ -12,6 +12,9 @@ import { AppService, ESMCStatus, SmcService } from '../../../services'
 import { StakingServiceV2, StakePackage, UserStake } from '../../../services/staking/stakingv2.service'
 import { OnModalWallet } from '../../../modals'
 import _ from 'lodash';
+import Web3 from "web3";
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 export const SectionBank: FC = () => {
 	return (
