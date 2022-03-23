@@ -10,6 +10,7 @@ import { InputTagSelect } from '../../../components/input/tag-select'
 import { DateTimeUtils, InputWraper, NumberUtils, useForm } from '../../../modules'
 import { AppService, ESMCStatus, SmcService } from '../../../services'
 import { StakingServiceV2, StakePackage, UserStake } from '../../../services/staking/stakingv2.service'
+import { OnModalWallet } from '../../../modals'
 import _ from 'lodash';
 
 export const SectionBank: FC = () => {
@@ -276,7 +277,7 @@ const Form: FC = () => {
 						{function () {
 							if (smc.error) return
 							if (smc.status === ESMCStatus.NONE) return;
-							if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => SmcService.handleConnectWallet()} />
+							if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => OnModalWallet()} />
 							
 							return <Button isLoading={isSubmitting} type="submit" label="Stake" />
 						}()}
@@ -341,7 +342,7 @@ const Form: FC = () => {
 												{function () {
 													if (smc.error) return
 													if (smc.status === ESMCStatus.NONE) return;
-													if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => SmcService.handleConnectWallet()} />
+													if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => OnModalWallet()} />
 													const isClaimActive = currentTime  >= endDate.getTime();
 													return <Button label="Claim" isLoading={isClaiming} onClick={() => handleClaim(s.id)} disabled={!isClaimActive} />;
 												}()}
