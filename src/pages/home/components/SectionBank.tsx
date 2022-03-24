@@ -208,7 +208,7 @@ const Form: FC = () => {
 		});
 
 		provider.on("connect", (info: { chainId: number }) => {
-			window.location.reload
+			console.log('info: ', info)
 		});
 
 		provider.on("disconnect", (error: { code: number; message: string }) => {
@@ -289,7 +289,7 @@ const Form: FC = () => {
 					{function () {
 						if (smc.error) return <div className="block">
 							{isMobile ? (
-								<Button label="Install" onClick={() => connectWallet()}/>
+								<Button label="Connect Wallet" onClick={() => connectWallet()}/>
 							) : (
 								<Message type="INFO" content={smc.error} />
 							)}

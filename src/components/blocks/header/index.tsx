@@ -39,7 +39,7 @@ export const Header: FC<Props> = (props) => {
         <header className="Header">
             <div className="container">
                 <div className="content">
-                    <NextLink href="/">
+                    <NextLink href="https://ubgtoken.com">
                         <a>
                             <img src="/images/logo-white.png" alt="" className="logo"/>
                         </a>

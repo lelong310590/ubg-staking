@@ -2,12 +2,6 @@ import {FC, Fragment} from "react";
 import {useSelector} from "../../AppStores";
 import {Button, Icon, Message} from "../../components";
 import {SmcService} from "./smc.service";
-import {isMobile} from 'react-device-detect';
-import { InjectedConnector } from "@web3-react/injected-connector";
-import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import Web3Modal from "web3modal";
-import Web3 from "web3";
 
 export const withSmcWalletWraper = (Component: FC<any>) => (props: any) => {
     const Cpn = withSmcWraper(() => {
