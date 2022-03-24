@@ -2,14 +2,11 @@ import {FC} from 'react'
 import {Link} from 'react-scroll'
 import NextLink from 'next/link'
 import {useSelector} from '../../../AppStores'
-
-import {OnModalWallet} from '../../../modals'
 import {Button} from '../../button'
 import {Icon} from '../../icon'
 import {UserAffiliateBox} from '../user-affiliate-box'
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
-import Web3 from "web3";
 
 interface Props {
     isIDOPage?: boolean
@@ -29,7 +26,7 @@ const connectWallet = async () => {
 
     const web3Modal = new Web3Modal({
         network: "mainnet", // optional
-        cacheProvider: true, // optional
+        cacheProvider: false, // optional
         providerOptions // required
     });
 

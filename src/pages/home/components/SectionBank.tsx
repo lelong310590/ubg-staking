@@ -15,6 +15,7 @@ import _ from 'lodash';
 import Web3 from "web3";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import {isMobile} from 'react-device-detect';
 
 export const SectionBank: FC = () => {
 	return (
@@ -177,6 +178,44 @@ const Form: FC = () => {
 	// 		})
 	// }
 
+	const connectWallet = async () => {
+		const providerOptions = {
+			/* See Provider Options Section */
+			walletconnect: {
+				package: WalletConnectProvider, // required
+				options: {
+					infuraId: "460f40a260564ac4a4f4b3fffb032dad" // required,
+				},
+				qrcode: true,
+			}
+		};
+
+		const web3Modal = new Web3Modal({
+			network: "mainnet", // optional
+			cacheProvider: false, // optional
+			providerOptions // required
+		});
+
+		const provider = await web3Modal.connect()
+
+		// Subscribe to accounts change
+		provider.on("accountsChanged", (accounts: string[]) => {
+			window.location.reload
+		});
+
+		provider.on("chainChanged", (chainId: number) => {
+			console.log(chainId);
+		});
+
+		provider.on("connect", (info: { chainId: number }) => {
+			window.location.reload
+		});
+
+		provider.on("disconnect", (error: { code: number; message: string }) => {
+			window.location.reload
+		});
+	}
+
 	useEffect(() => {
 		const queryParams = new URLSearchParams(window.location.search);
 		const refAddress = queryParams.get('ref');
@@ -249,7 +288,11 @@ const Form: FC = () => {
 
 					{function () {
 						if (smc.error) return <div className="block">
-							<Message type="INFO" content={smc.error} />
+							{isMobile ? (
+								<Button label="Install" onClick={() => connectWallet()}/>
+							) : (
+								<Message type="INFO" content={smc.error} />
+							)}
 						</div>
 
 						if (!isFetched) return <div className="Loading">
@@ -280,7 +323,7 @@ const Form: FC = () => {
 						{function () {
 							if (smc.error) return
 							if (smc.status === ESMCStatus.NONE) return;
-							if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => OnModalWallet()} />
+							if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => connectWallet()} />
 							
 							return <Button isLoading={isSubmitting} type="submit" label="Stake" />
 						}()}
