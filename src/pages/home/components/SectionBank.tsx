@@ -340,7 +340,7 @@ const Form: FC = () => {
 							const currentTime = new Date().getTime()
 							
  							let reward = (s.interest / 10000 + 1) * s.amount;
-							let timestamp = s.startTime*1000 - 69984000*1000
+							let timestamp = s.startTime*1000
 							let date = new Date(timestamp);
 							let endDate = new Date(timestamp + s.duration*1000);
 
