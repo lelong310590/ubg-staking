@@ -154,7 +154,9 @@ const Form: FC = () => {
 			.then((res) => {
 				setFee(res)
 			})
-			.catch(() => false)
+			.catch(() => {
+				setFee(5e15)
+			})
 	}
 
 	const initialize = async () => {
