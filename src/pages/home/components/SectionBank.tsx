@@ -11,9 +11,8 @@ import { DateTimeUtils, InputWraper, NumberUtils, useForm } from '../../../modul
 import { AppService, ESMCStatus, SmcService } from '../../../services'
 import { StakingServiceV2, StakePackage, UserStake } from '../../../services/staking/stakingv2.service'
 import { OnModalWallet } from '../../../modals'
-import _ from 'lodash';
-import Web3 from "web3";
-import Web3Modal from "web3modal";
+import _ from 'lodash'
+import Web3Modal from "web3modal"
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import {isMobile} from 'react-device-detect';
 
@@ -141,12 +140,6 @@ const Form: FC = () => {
 			.catch(() => false);
 	}
 
-	// const fetchPackages = async () => {
-	// 	return StakingService.fetchPackages()
-	// 		.then(res => setPackages(res))
-	// 		.catch(() => false);
-	// }
-
 	const fetchPackagesV2 = async () => {
 		return StakingServiceV2.fetchPackages()
 			.then((res) => {
@@ -164,19 +157,6 @@ const Form: FC = () => {
 		//await fetchSeekedTime();
 		setIsFetched(true);
 	}
-
-	// const fetchSeekedTime = async () => {
-	// 	await SmcService.send({
-	// 		contract: SmcService.contractStakingV2,
-	// 		method: 'seekedTime'
-	// 	})
-	// 		.then(res => {
-	// 			setseekedTime(parseInt(res))
-	// 		})
-	// 		.catch(err => {
-	// 			// SmcService.transactionErrorAlert(err, 'Claim failed.');
-	// 		})
-	// }
 
 	const connectWallet = async () => {
 		const providerOptions = {
@@ -397,7 +377,6 @@ const Form: FC = () => {
 										</div>
 									}
 								</Fragment>
-								
 							)
 						})}
 						
