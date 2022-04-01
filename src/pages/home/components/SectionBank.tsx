@@ -74,7 +74,7 @@ const Form: FC = () => {
 					return SmcService.send({
 						contract: SmcService.contractStakingV2,
 						method: 'stake',
-						params: fee,
+						params: {value: fee}
 					}, values.packageId, NumberUtils.cryptoConvert('encode', values.amount, SmcService.contractUBGToken._decimals), ref ?? '0x0000000000000000000000000000000000000000')
 						.then(async (res) => {
 							await fetchUserBalance();
@@ -245,7 +245,7 @@ const Form: FC = () => {
 		await SmcService.send({
 			contract: SmcService.contractStakingV2,
 			method: 'claim',
-			params: fee
+			params: {value: fee}
 		}, packageId)
 			.then(async res => {
 				await fetchUserBalance();
