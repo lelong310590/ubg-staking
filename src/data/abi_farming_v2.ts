@@ -3,6 +3,11 @@ export const abi_farming_v2 = [
     inputs: [
       {
         internalType: "address",
+        name: "_ownerAddress",
+        type: "address",
+      },
+      {
+        internalType: "address",
         name: "_ubgTokenAddress",
         type: "address",
       },
@@ -247,6 +252,19 @@ export const abi_farming_v2 = [
     type: "event",
   },
   {
+    inputs: [],
+    name: "_getBlockTimestamp",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -427,7 +445,7 @@ export const abi_farming_v2 = [
         type: "bool",
       },
     ],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -477,6 +495,38 @@ export const abi_farming_v2 = [
     inputs: [
       {
         internalType: "uint256",
+        name: "id",
+        type: "uint256",
+      },
+    ],
+    name: "closePack",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "comissionAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
         name: "_packId",
         type: "uint256",
       },
@@ -499,7 +549,26 @@ export const abi_farming_v2 = [
         type: "bool",
       },
     ],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "farmAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -542,8 +611,40 @@ export const abi_farming_v2 = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "farmPaidAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
-    name: "farmingAmount",
+    name: "farmingUsers",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "fee",
     outputs: [
       {
         internalType: "uint256",
@@ -722,25 +823,12 @@ export const abi_farming_v2 = [
   },
   {
     inputs: [],
-    name: "owedCommissionAmount",
+    name: "name",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "owedInterestAmount",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        type: "string",
       },
     ],
     stateMutability: "view",
@@ -754,6 +842,112 @@ export const abi_farming_v2 = [
         internalType: "address",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "packClosed",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "packs",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "id",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "tokenAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "minFarm",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "interestSec",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "farmingType",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "endTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "commission1",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "commission2",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "commission3",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "commission4",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "commission5",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "enabled",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "packsLength",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -830,6 +1024,19 @@ export const abi_farming_v2 = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_fee",
+        type: "uint256",
+      },
+    ],
+    name: "setFee",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "systemAddress",
     outputs: [
@@ -837,19 +1044,6 @@ export const abi_farming_v2 = [
         internalType: "address",
         name: "",
         type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "totalPaidAmount",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -897,25 +1091,6 @@ export const abi_farming_v2 = [
   {
     inputs: [],
     name: "withdrawAllBNB",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "withdrawUBG",
     outputs: [
       {
         internalType: "bool",
