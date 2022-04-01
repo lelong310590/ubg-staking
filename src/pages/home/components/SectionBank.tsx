@@ -40,6 +40,7 @@ const Form: FC = () => {
 	const [seekedTime, setseekedTime] = useState(null as null | any)
 	const [now, setNow] = useState(new Date());
 	const [ref, setRef] = useState('0x0000000000000000000000000000000000000000')
+	const [fee, setFee] = useState(null as null | number)
 
 	const validateAmount = (value: number) => {
 		if (value && typeof balance === 'number') {
@@ -70,10 +71,10 @@ const Form: FC = () => {
 				toContract: SmcService.contractUBGToken,
 			}, values.amount)
 				.then(async () => {
-					console.log("MINHTH  ref", ref);
 					return SmcService.send({
 						contract: SmcService.contractStakingV2,
-						method: 'stake'
+						method: 'stake',
+						params: fee,
 					}, values.packageId, NumberUtils.cryptoConvert('encode', values.amount, SmcService.contractUBGToken._decimals), ref ?? '0x0000000000000000000000000000000000000000')
 						.then(async (res) => {
 							await fetchUserBalance();
@@ -148,12 +149,20 @@ const Form: FC = () => {
 			.catch(() => false);
 	}
 
+	const fetchFee = async () => {
+		return StakingServiceV2.fetchFee()
+			.then((res) => {
+				setFee(res)
+			})
+			.catch(() => false)
+	}
 
 	const initialize = async () => {
 		// await fetchTime();
 		// TODO: uncomment it when go to v1
 		// await fetchPackages();
 		await fetchPackagesV2();
+		await fetchFee();
 		//await fetchSeekedTime();
 		setIsFetched(true);
 	}
@@ -233,7 +242,8 @@ const Form: FC = () => {
 
 		await SmcService.send({
 			contract: SmcService.contractStakingV2,
-			method: 'claim'
+			method: 'claim',
+			params: fee
 		}, packageId)
 			.then(async res => {
 				await fetchUserBalance();

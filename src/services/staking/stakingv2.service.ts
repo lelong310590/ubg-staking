@@ -1,6 +1,14 @@
-import { SmcService } from "../smc";
+import {SmcService} from "../smc";
 
 export class StakingServiceV2 {
+
+	static async fetchFee(): Promise<any> {
+		return await SmcService.call({
+			contract: SmcService.contractStakingV2,
+			method: "fee",
+		})
+	}
+
 	static async fetchPackages(): Promise<StakePackage[]> {
 		const packages = await Promise.all(
 			["1", "3", "4", "5", "6", "7", "8", "9", "10"].map(async (value, index) => {
