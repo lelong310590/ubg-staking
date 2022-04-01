@@ -329,7 +329,7 @@ export class SmcService {
                 );
 
             const gas = await func(...args)
-                .estimateGas({from: SmcService.address})
+                .estimateGas({from: SmcService.address, value: options.params?.value})
                 .then((res: number) => +res * 2)
                 .catch((err: any) => {
                     reject(err);
