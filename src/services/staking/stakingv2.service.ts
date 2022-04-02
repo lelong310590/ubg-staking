@@ -11,7 +11,7 @@ export class StakingServiceV2 {
 
 	static async fetchPackages(): Promise<StakePackage[]> {
 		const packages = await Promise.all(
-			["1", "3", "4", "5", "6", "7", "8", "9", "10"].map(async (value, index) => {
+			["1", "2", "3", "4", "5", "6", "7", "8", "9"].map(async (value, index) => {
 				const packageRes = await SmcService.call(
 					{
 						contract: SmcService.contractStakingV2,
