@@ -7,12 +7,27 @@ import { clearIntervalAsync, setIntervalAsync } from 'set-interval-async/fixed'
 import { DateTimeUtils, InputWraper, NumberUtils, useForm } from '../../../modules'
 import { SmcService } from '../../../services'
 import CountUp from 'react-countup';
+import {AppService} from "../../../services";
+import language from './../../../../lang/lang.json'
+import {useStore} from 'react-redux'
 
 export const SectionHead: FC = () => {
 
+	const store = useStore();
 	const smc = useSelector(s => s.smc);
 	const [totalStakingAmount, setTotalStakingAmount] = useState(0 as number);
 	const [totalPaidAmount, setTotalPaidAmount] = useState(0 as number);
+	const lang = useSelector(state => state.app.lang)
+
+	const changeLang = (selectedLang) => {
+		if (selectedLang === 'en') {
+			AppService.setLang(language.en, store)
+		} else {
+			AppService.setLang(language.vi, store)
+		}
+
+		sessionStorage.setItem('language', selectedLang);
+	}
 
 	useEffect(() => {
 		let interval: any;
@@ -63,11 +78,15 @@ export const SectionHead: FC = () => {
 				<div className="container">
 					<div className="banner">
 						<div className="info">
-							<h1 className="sectionTitle">UBG Token was borned for a mission:</h1>
-							<p className="sectionExcerpt">UBG Token was borned for a mission: Breaking through all limits of Payment by Crypto Currencies wherever and whenever. We create a new payment method for E- Commercial and Travel, making it faster, transparent, profitable, secure and great in future..</p>
+							<div className="info-change-language">
+								<a onClick={() => changeLang('en')}>English</a>
+								<a onClick={() => changeLang('vi')}>Vietnamese</a>
+							</div>
+							<h1 className="sectionTitle">{lang.hero_title}</h1>
+							<p className="sectionExcerpt">{lang.hero_excerpt}</p>
 							<div className="stake-stats">
-								<p>Total Staking Amount: <CountUp end={totalStakingAmount} suffix=" UBG" /></p>
-								<p>Total Paid Amount: <CountUp end={totalPaidAmount} suffix=" UBG" /></p>
+								<p>{lang.total_staking_amount} <CountUp end={totalStakingAmount} suffix=" UBG" /></p>
+								<p>{lang.total_paid_amount} <CountUp end={totalPaidAmount} suffix=" UBG" /></p>
 							</div>
 						</div>
 						<img src="/images/head.png" alt="" />

@@ -32,6 +32,7 @@ export const SectionBank: FC = () => {
 
 const Form: FC = () => {
 	const smc = useSelector(s => s.smc);
+	const lang = useSelector(state => state.app.lang);
 	const [isFetched, setIsFetched] = useState(false);
 	const [balance, setBalance] = useState(null as null | number);
 	const [packages, setPackages] = useState(null as null | StakePackage[]);
@@ -53,12 +54,12 @@ const Form: FC = () => {
 		fields: {
 			amount: {
 				isRequired: true,
-				label: 'Enter your amount to save',
+				label: lang.enter_your_amount_to_earn,
 				validate: validateAmount,
 			},
 			packageId: {
 				isRequired: true,
-				label: 'Saving duration',
+				label: lang.saving_duration,
 				exProps: {
 					options: packages ? packages.map(v => ({ label: v.name, value: v.id })) : [],
 				},
@@ -85,19 +86,6 @@ const Form: FC = () => {
 							console.log('err: ', err)
 							SmcService.transactionErrorAlert(err, 'Stake failed.');
 						})
-
-					// return SmcService.send({
-					// 	contract: SmcService.contractStakingV2,
-					// 	method: 'stake'
-					// }, NumberUtils.cryptoConvert('encode', values.amount, SmcService.contractUBGToken._decimals), values.packageId)
-					// 	.then(async (res) => {
-					// 		await fetchUserBalance();
-					// 		await fetchUserStake();
-					// 		SmcService.transactionSuccessAlert(res, 'Stake successfully.');
-					// 	})
-					// 	.catch((err) => {
-					// 		SmcService.transactionErrorAlert(err, 'Stake failed.');
-					// 	})
 				})
 				.catch(() => {
 					return AppService.createErrNoti('Approve amount failed.');
@@ -170,6 +158,7 @@ const Form: FC = () => {
 	}
 
 	const connectWallet = async () => {
+
 		const providerOptions = {
 			/* See Provider Options Section */
 			walletconnect: {
@@ -183,7 +172,7 @@ const Form: FC = () => {
 
 		const web3Modal = new Web3Modal({
 			network: "mainnet", // optional
-			cacheProvider: false, // optional
+			cacheProvider: true, // optional
 			providerOptions // required
 		});
 
@@ -273,7 +262,7 @@ const Form: FC = () => {
 						<div className="title">Investment</div>
 						<div className="UserBalance">
 							<span className="icon"><Icon.Wallet /></span>
-							<span className="label">Your balance:</span>
+							<span className="label">{lang.your_balance}</span>
 							<span className="value">{balance === null ? '--' : `${balance.toLocaleString(getLocaleKey(true), { maximumFractionDigits: 9 })} UBG`}</span>
 						</div>
 					</div>
@@ -281,7 +270,7 @@ const Form: FC = () => {
 					{function () {
 						if (smc.error) return <div className="block">
 							{isMobile ? (
-								<Button label="Connect Wallet" onClick={() => connectWallet()}/>
+								<Button label={lang.connect_wallet} onClick={() => connectWallet()}/>
 							) : (
 								<Message type="INFO" content={smc.error} />
 							)}
@@ -305,7 +294,7 @@ const Form: FC = () => {
 								<InputWraper inputProps={inputProps.amount} component={InputNumber} />
 								<InputWraper inputProps={inputProps.packageId} component={InputTagSelect} className="hideBorder" />
 
-								<p className="note">After <strong className="textPrimary">{packageActive.numberOfDays} days</strong> with <strong className="textPrimary">{values.amount ? (+values.amount).toLocaleString(getLocaleKey(true), { maximumFractionDigits: 2 }) : '--'} UBG</strong>, you will able to claim <strong className="textPrimary">{reward ? reward.toLocaleString(getLocaleKey(true), { maximumFractionDigits: 2 }) : '--'} UBG</strong></p>
+								<p className="note">{lang.after} <strong className="textPrimary">{packageActive.numberOfDays} {lang.day_s}</strong> {lang.with} <strong className="textPrimary">{values.amount ? (+values.amount).toLocaleString(getLocaleKey(true), { maximumFractionDigits: 2 }) : '--'} UBG</strong>, {lang.you_will_able_to_claim} <strong className="textPrimary">{reward ? reward.toLocaleString(getLocaleKey(true), { maximumFractionDigits: 2 }) : '--'} UBG</strong></p>
 								
 							</Fragment>
 						</>
@@ -315,7 +304,7 @@ const Form: FC = () => {
 						{function () {
 							if (smc.error) return
 							if (smc.status === ESMCStatus.NONE) return;
-							if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => connectWallet()} />
+							if (smc.status !== ESMCStatus.READY) return <Button label={lang.connect_wallet} buttonType="warning" onClick={() => connectWallet()} />
 							
 							return <Button isLoading={isSubmitting} type="submit" label="Stake" />
 						}()}
@@ -360,19 +349,19 @@ const Form: FC = () => {
 												<img src="./images/pool.png" alt="" className="img-fluid" />
 												<div className="stake-infomation">
 													<div className="rowInfo">
-														<div className="label">Saving</div>
+														<div className="label">{lang.saving}</div>
 														<div className="value">{s.amount / 1e9} UBG</div>
 													</div>
 													<div className="rowInfo">
-														<div className="label">Reward</div>
+														<div className="label">{lang.reward}</div>
 														<div className="value">{reward / 1e9 - s.amount / 1e9} UBG</div>
 													</div>
 													<div className="rowInfo">
-														<div className="label">Start Day</div>
+														<div className="label">{lang.start_day}</div>
 														<div className="value">{showDate}</div>
 													</div>
 													<div className="rowInfo">
-														<div className="label">Paid Day</div>
+														<div className="label">{lang.paid_day}</div>
 														<div className="value">{showEndDate}</div>
 													</div>
 												</div>
@@ -380,9 +369,9 @@ const Form: FC = () => {
 												{function () {
 													if (smc.error) return
 													if (smc.status === ESMCStatus.NONE) return;
-													if (smc.status !== ESMCStatus.READY) return <Button label="Connect Wallet" buttonType="warning" onClick={() => OnModalWallet()} />
+													if (smc.status !== ESMCStatus.READY) return <Button label={lang.connect_wallet} buttonType="warning" onClick={() => OnModalWallet()} />
 													const isClaimActive = currentTime  >= endDate.getTime();
-													return <Button label="Claim" isLoading={isClaiming} onClick={() => handleClaim(s.id)} disabled={!isClaimActive} />;
+													return <Button label={lang.claim} isLoading={isClaiming} onClick={() => handleClaim(s.id)} disabled={!isClaimActive} />;
 												}()}
 												</div>
 											</div>

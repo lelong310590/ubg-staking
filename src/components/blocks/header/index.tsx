@@ -26,11 +26,28 @@ const connectWallet = async () => {
 
     const web3Modal = new Web3Modal({
         network: "mainnet", // optional
-        cacheProvider: false, // optional
+        cacheProvider: true, // optional
         providerOptions // required
     });
 
-    await web3Modal.connect()
+    const provider = await web3Modal.connect()
+
+    // Subscribe to accounts change
+    provider.on("accountsChanged", (accounts: string[]) => {
+        window.location.reload
+    });
+
+    provider.on("chainChanged", (chainId: number) => {
+        console.log(chainId);
+    });
+
+    provider.on("connect", (info: { chainId: number }) => {
+        console.log('info: ', info)
+    });
+
+    provider.on("disconnect", (error: { code: number; message: string }) => {
+        window.location.reload
+    });
 }
 
 export const Header: FC<Props> = (props) => {

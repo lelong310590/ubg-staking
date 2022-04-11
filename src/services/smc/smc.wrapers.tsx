@@ -1,4 +1,4 @@
-import {FC, Fragment} from "react";
+import {FC} from "react";
 import {useSelector} from "../../AppStores";
 import {Button, Icon, Message} from "../../components";
 import {SmcService} from "./smc.service";
