@@ -83,7 +83,7 @@ export const SectionHead: FC = () => {
 								<a onClick={() => changeLang('vi')}>Vietnamese</a>
 							</div>
 							<h1 className="sectionTitle">{lang.hero_title}</h1>
-							<p className="sectionExcerpt">{lang.hero_excerpt}</p>
+							<p className="sectionExcerpt" dangerouslySetInnerHTML={{ __html: lang.hero_excerpt }}/>
 							<div className="stake-stats">
 								<p>{lang.total_staking_amount} <CountUp end={totalStakingAmount} suffix=" UBG" /></p>
 								<p>{lang.total_paid_amount} <CountUp end={totalPaidAmount} suffix=" UBG" /></p>
