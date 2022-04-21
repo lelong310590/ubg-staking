@@ -30,11 +30,13 @@ const connectWallet = async () => {
     };
 
     console.log("MMM 2", providerOptions);
+
     const web3Modal = new Web3Modal({
         network: "mainnet", // optional
         cacheProvider: true, // optional
         providerOptions // required
     });
+    web3Modal.clearCachedProvider();
 
     console.log("MMM 3", web3Modal);
     const provider = await web3Modal.connect()
