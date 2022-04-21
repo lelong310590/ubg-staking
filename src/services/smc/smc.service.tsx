@@ -65,18 +65,22 @@ export class SmcService {
         if (window.ethereum) {
             this.handleEthereum();
           } else {
-            window.addEventListener('ethereum#initialized', this.handleEthereum, {
+            window.addEventListener('ethereum#initialized', () => {
+                console.log("MM: ethereum#initialized");
+                this.handleEthereum()
+            }, {
               once: true,
             });
           
             // If the event is not dispatched by the end of the timeout,
             // the user probably doesn't have MetaMask installed.
-            setTimeout(() => {
-                this.handleEthereum();
-            }, 3000); // 3 seconds
+            // setTimeout(() => {
+            //     this.handleEthereum();
+            // }, 3000); // 3 seconds
           }
     }
     static async handleEthereum() {
+        console.log("handleEthereum");
         try {
             const {ethereum} = window as any;
             console.log("MM: ", ethereum);
