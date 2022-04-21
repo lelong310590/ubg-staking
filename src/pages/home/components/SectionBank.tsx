@@ -275,6 +275,11 @@ const Form: FC = () => {
 					{function () {
 						<Button label={" -- " + lang.connect_wallet + " -- "} onClick={() => connectWallet()}/>
 
+						if (!isFetched) return <div className="Loading">
+							<Icon.Loading />
+							Loading...
+						</div>
+
 						const packageActive = packages.find(v => v.id === values.packageId) as StakePackage;
 						//const reward = values.amount ? (values.amount * packageActive.interest) / 100 : 0;
 						const reward = values.amount ? (packageActive.interest / 10000 + 1) * values.amount : 0;
