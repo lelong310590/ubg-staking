@@ -18,6 +18,9 @@ const connectWallet = async () => {
         /* See Provider Options Section */
         walletconnect: {
             package: WalletConnectProvider, // required
+            options: {
+                infuraId: "460f40a260564ac4a4f4b3fffb032dad" // required,
+            },
             qrcode: true,
         }
     };
