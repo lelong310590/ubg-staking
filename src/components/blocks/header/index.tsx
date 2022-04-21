@@ -18,7 +18,11 @@ const connectWallet = async () => {
         walletconnect: {
             package: WalletConnectProvider, // required
             options: {
-                infuraId: "460f40a260564ac4a4f4b3fffb032dad" // required,
+                infuraId: "460f40a260564ac4a4f4b3fffb032dad", // required,
+                rpc: {
+                    56: 'https://bsc-dataseed1.binance.org'
+                },
+                chainId: 56
             },
             qrcode: true,
         }

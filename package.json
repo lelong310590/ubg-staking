@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "compress-dic": "node ./lang/helper/compress.js",
-    "dev": "nodemon --watch './next.config.js' --watch './default.env.js'  --watch './lang/dictionary.json' --exec 'npm run compress-dic --scripts-prepend-node-path && next -p 4000'",
+    "dev": "nodemon --watch './next.config.js' --watch './default.env.js'  --watch './lang/dictionary.json' --exec 'npm run compress-dic --scripts-prepend-node-path && next -p 4000 --hostname 0.0.0.0 '",
     "build": "npm run compress-dic && next build",
     "start": "next start -p $PORT"
   },
   "dependencies": {
     "@apollo/client": "^3.3.13",
     "@binance-chain/bsc-use-wallet": "^0.8.1",
-    "@walletconnect/web3-provider": "^1.7.5",
+    "@walletconnect/web3-provider": "^1.7.7",
     "@web3-react/walletconnect-connector": "^6.2.13",
     "axios": "^0.21.1",
     "express-useragent": "^1.0.15",
