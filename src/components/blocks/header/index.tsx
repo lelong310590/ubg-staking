@@ -13,6 +13,7 @@ interface Props {
 }
 
 const connectWallet = async () => {
+    console.log("MMM 1, connectWallet");
     const providerOptions = {
         /* See Provider Options Section */
         walletconnect: {
@@ -28,20 +29,24 @@ const connectWallet = async () => {
         }
     };
 
+    console.log("MMM 2", providerOptions);
     const web3Modal = new Web3Modal({
         network: "mainnet", // optional
         cacheProvider: true, // optional
         providerOptions // required
     });
 
+    console.log("MMM 3", web3Modal);
     const provider = await web3Modal.connect()
 
     // Subscribe to accounts change
     provider.on("accountsChanged", (accounts: string[]) => {
+        console.log("MMM 4 accountsChanged");
         window.location.reload
     });
 
     provider.on("chainChanged", (chainId: number) => {
+        console.log("MMM 4 chainChanged");
         console.log(chainId);
     });
 
