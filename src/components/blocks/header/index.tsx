@@ -18,13 +18,6 @@ const connectWallet = async () => {
         /* See Provider Options Section */
         walletconnect: {
             package: WalletConnectProvider, // required
-            options: {
-                infuraId: "460f40a260564ac4a4f4b3fffb032dad", // required,
-                rpc: {
-                    56: 'https://bsc-dataseed1.binance.org'
-                },
-                chainId: 56
-            },
             qrcode: true,
         }
     };
@@ -40,15 +33,15 @@ const connectWallet = async () => {
 
     console.log("MMM 3", web3Modal);
     const provider = await web3Modal.connect()
-
+    console.log("MMM 4", provider);
     // Subscribe to accounts change
     provider.on("accountsChanged", (accounts: string[]) => {
-        console.log("MMM 4 accountsChanged");
+        console.log("MMM 5 accountsChanged");
         window.location.reload
     });
 
     provider.on("chainChanged", (chainId: number) => {
-        console.log("MMM 4 chainChanged");
+        console.log("MMM 5 chainChanged");
         console.log(chainId);
     });
 
