@@ -17,20 +17,21 @@ const connectWallet = async () => {
     const providerOptions = {
         /* See Provider Options Section */
         walletconnect: {
-            package: WalletConnectProvider, // required
+            package: WalletConnectProvider,
             options: {
-                infuraId: "460f40a260564ac4a4f4b3fffb032dad", // required,
+              rpc: {
+                56: "https://bsc-dataseed.binance.org",
+              },
+              chainId: 56,
+              network: 'binance'
             },
-            qrcode: true,
-        }
+          },
     };
     console.log("MMM2 ", providerOptions);
 
     const web3Modal = new Web3Modal({
-        network: "mainnet", // optional
         cacheProvider: true, // optional
         providerOptions, // required
-        disableInjectedProvider: true
     });
     console.log("MMM2-1 ", web3Modal);
     web3Modal.clearCachedProvider();

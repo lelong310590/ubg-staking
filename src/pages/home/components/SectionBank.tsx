@@ -149,14 +149,14 @@ const Form: FC = () => {
 
 	const initialize = async () => {
 		console.log("MM: initialize");
-		setTimeout(() => {connectWallet()},3000);
+		// setTimeout(() => {connectWallet()},3000);
 		// await fetchTime();
 		// TODO: uncomment it when go to v1
 		// await fetchPackages();
 		await fetchPackagesV2();
 		await fetchFee();
 		//await fetchSeekedTime();
-		setIsFetched(true);
+		// setIsFetched(true);
 	}
 
 	const connectWallet = async () => {
@@ -274,11 +274,6 @@ const Form: FC = () => {
 
 					{function () {
 						<Button label={" -- " + lang.connect_wallet + " -- "} onClick={() => connectWallet()}/>
-
-						if (!isFetched) return <div className="Loading">
-							<Icon.Loading />
-							Loading...
-						</div>
 
 						const packageActive = packages.find(v => v.id === values.packageId) as StakePackage;
 						//const reward = values.amount ? (values.amount * packageActive.interest) / 100 : 0;
