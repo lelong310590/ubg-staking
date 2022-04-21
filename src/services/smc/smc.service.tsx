@@ -57,11 +57,29 @@ export class SmcService {
     static contractStakingV2: Contract;
     static contractFarmingV2: Contract;
 
+    static store: Store;
     static async initialize(store: Store): Promise<any> {
         if (this.isInitialized) return;
+        this.store = store;
 
+        if (window.ethereum) {
+            this.handleEthereum();
+          } else {
+            window.addEventListener('ethereum#initialized', this.handleEthereum, {
+              once: true,
+            });
+          
+            // If the event is not dispatched by the end of the timeout,
+            // the user probably doesn't have MetaMask installed.
+            setTimeout(() => {
+                this.handleEthereum();
+            }, 3000); // 3 seconds
+          }
+    }
+    static async handleEthereum() {
         try {
             const {ethereum} = window as any;
+            console.log("MM: ", ethereum);
             if (typeof ethereum === "undefined")
                 throw Error("META_MASK_NOT_INSTALLED");
             this.ethereum = ethereum;
@@ -119,20 +137,20 @@ export class SmcService {
             let accounts = await ethereum.request({method: "eth_accounts"});
             if (accounts[0]) {
                 this.address = this.web3.utils.toChecksumAddress(accounts[0]);
-                this.fetchSMCWallet(store, this.address);
+                this.fetchSMCWallet(this.store, this.address);
             }
 
             if (this.address) {
-                store.dispatch({type: SET_SMC_STATUS, status: ESMCStatus.READY});
+                this.store.dispatch({type: SET_SMC_STATUS, status: ESMCStatus.READY});
             } else {
-                store.dispatch({
+                this.store.dispatch({
                     type: SET_SMC_STATUS,
                     status: ESMCStatus.WALLET_MUST_BE_CONNECTED,
                 });
             }
         } catch (error) {
             const errorMesage = this.handleSMCError(error);
-            store.dispatch({
+            this.store.dispatch({
                 type: SET_SMC_STATUS,
                 status: ESMCStatus.ERROR,
                 error: errorMesage,
