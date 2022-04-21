@@ -13,35 +13,27 @@ interface Props {
 }
 
 const connectWallet = async () => {
-    console.log("MMM1: connectWallet");
     const providerOptions = {
         /* See Provider Options Section */
         walletconnect: {
-            package: WalletConnectProvider,
+            package: WalletConnectProvider, // required
             options: {
-              rpc: {
-                56: "https://bsc-dataseed.binance.org",
-              },
-              chainId: 56,
-              network: 'binance'
+                infuraId: "460f40a260564ac4a4f4b3fffb032dad" // required,
             },
-          },
+            qrcode: true,
+        }
     };
-    console.log("MMM2 ", providerOptions);
 
     const web3Modal = new Web3Modal({
+        network: "mainnet", // optional
         cacheProvider: true, // optional
-        providerOptions, // required
+        providerOptions // required
     });
-    console.log("MMM2-1 ", web3Modal);
-    web3Modal.clearCachedProvider();
-    const provider = await web3Modal.connect()
 
-    console.log("MMM2-2 ", provider);
+    const provider = await web3Modal.connect()
 
     // Subscribe to accounts change
     provider.on("accountsChanged", (accounts: string[]) => {
-        console.log("MMM3: accountsChanged");
         window.location.reload
     });
 
@@ -54,7 +46,6 @@ const connectWallet = async () => {
     });
 
     provider.on("disconnect", (error: { code: number; message: string }) => {
-        console.log("MM 2: disconnect");
         window.location.reload
     });
 }

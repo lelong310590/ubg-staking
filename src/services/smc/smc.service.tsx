@@ -57,33 +57,11 @@ export class SmcService {
     static contractStakingV2: Contract;
     static contractFarmingV2: Contract;
 
-    static store: Store;
     static async initialize(store: Store): Promise<any> {
         if (this.isInitialized) return;
-        this.store = store;
 
-        if (window.ethereum) {
-            this.handleEthereum();
-          } else {
-            window.addEventListener('ethereum#initialized', () => {
-                console.log("MM: ethereum#initialized");
-                this.handleEthereum()
-            }, {
-              once: true,
-            });
-          
-            // If the event is not dispatched by the end of the timeout,
-            // the user probably doesn't have MetaMask installed.
-            // setTimeout(() => {
-            //     this.handleEthereum();
-            // }, 3000); // 3 seconds
-          }
-    }
-    static async handleEthereum() {
-        console.log("handleEthereum");
         try {
             const {ethereum} = window as any;
-            console.log("MM: ", ethereum);
             if (typeof ethereum === "undefined")
                 throw Error("META_MASK_NOT_INSTALLED");
             this.ethereum = ethereum;
@@ -141,20 +119,20 @@ export class SmcService {
             let accounts = await ethereum.request({method: "eth_accounts"});
             if (accounts[0]) {
                 this.address = this.web3.utils.toChecksumAddress(accounts[0]);
-                this.fetchSMCWallet(this.store, this.address);
+                this.fetchSMCWallet(store, this.address);
             }
 
             if (this.address) {
-                this.store.dispatch({type: SET_SMC_STATUS, status: ESMCStatus.READY});
+                store.dispatch({type: SET_SMC_STATUS, status: ESMCStatus.READY});
             } else {
-                this.store.dispatch({
+                store.dispatch({
                     type: SET_SMC_STATUS,
                     status: ESMCStatus.WALLET_MUST_BE_CONNECTED,
                 });
             }
         } catch (error) {
             const errorMesage = this.handleSMCError(error);
-            this.store.dispatch({
+            store.dispatch({
                 type: SET_SMC_STATUS,
                 status: ESMCStatus.ERROR,
                 error: errorMesage,
@@ -243,7 +221,6 @@ export class SmcService {
     }
 
     static async fetchIdoInvestor(store: Store) {
-        if (!this.contractIDO || !this.contractIDO.methods) return;
         const data = await this.contractIDO.methods.investors(this.address).call();
         const isClaimed = await this.contractIDO.methods
             .claimed(this.address)
@@ -256,7 +233,6 @@ export class SmcService {
     }
 
     static async fetchIdoPrice(store: Store) {
-        if (!this.contractIDO || !this.contractIDO.methods) return;
         const data = await this.contractIDO.methods
             .price()
             .call()
@@ -270,7 +246,6 @@ export class SmcService {
     }
 
     static async buyToken(store: Store, affiliateCode: string, amount: number) {
-        if (!this.contractIDO || !this.contractIDO.methods) return;
         const payableAmount = this.convertAmount("encode", amount);
         const refer = affiliateCode || this.configs.SMC_ROOT_ADDRESS;
         try {
@@ -286,7 +261,6 @@ export class SmcService {
     }
 
     static async claim(store: Store, affiliateCode: string) {
-        if (!this.contractIDO || !this.contractIDO.methods) return;
         const refer = affiliateCode || this.configs.SMC_ROOT_ADDRESS;
         try {
             await this.contractIDO.methods.claim(refer).send();
@@ -309,7 +283,6 @@ export class SmcService {
         ...args: any
     ): Promise<any> {
         return new Promise(async (resolve, reject) => {
-            if (!options || !options.contract) return;
             console.log("options", options);
             const func = options.contract.methods[options.method] as any;
             if (typeof func !== "function")
@@ -346,7 +319,7 @@ export class SmcService {
     ): Promise<Transaction> {
         return new Promise(async (resolve, reject) => {
             let interval: any, transactionHash: string;
-            if (!options || !options.contract) return;
+
             const func = options.contract.methods[options.method] as any;
             if (typeof func !== "function")
                 reject(

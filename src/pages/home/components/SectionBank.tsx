@@ -148,30 +148,27 @@ const Form: FC = () => {
 	}
 
 	const initialize = async () => {
-		console.log("MM: initialize");
-		// setTimeout(() => {connectWallet()},3000);
 		// await fetchTime();
 		// TODO: uncomment it when go to v1
 		// await fetchPackages();
 		await fetchPackagesV2();
 		await fetchFee();
 		//await fetchSeekedTime();
-		// setIsFetched(true);
+		setIsFetched(true);
 	}
 
 	const connectWallet = async () => {
-		console.log("MM 2: connectWallet");
+
 		const providerOptions = {
 			/* See Provider Options Section */
 			walletconnect: {
 				package: WalletConnectProvider, // required
 				options: {
-					infuraId: "460f40a260564ac4a4f4b3fffb032dad", // required,
+					infuraId: "460f40a260564ac4a4f4b3fffb032dad" // required,
 				},
 				qrcode: true,
 			}
 		};
-		console.log("MM2 ", providerOptions);
 
 		const web3Modal = new Web3Modal({
 			network: "mainnet", // optional
@@ -183,7 +180,6 @@ const Form: FC = () => {
 
 		// Subscribe to accounts change
 		provider.on("accountsChanged", (accounts: string[]) => {
-			console.log("MM3: accountsChanged");
 			window.location.reload
 		});
 
@@ -196,7 +192,6 @@ const Form: FC = () => {
 		});
 
 		provider.on("disconnect", (error: { code: number; message: string }) => {
-			console.log("MM 2: disconnect");
 			window.location.reload
 		});
 	}
@@ -273,7 +268,13 @@ const Form: FC = () => {
 					</div>
 
 					{function () {
-						<Button label={" -- " + lang.connect_wallet + " -- "} onClick={() => connectWallet()}/>
+						if (smc.error) return <div className="block">
+							{isMobile ? (
+								<Button label={lang.connect_wallet} onClick={() => connectWallet()}/>
+							) : (
+								<Message type="INFO" content={smc.error} />
+							)}
+						</div>
 
 						if (!isFetched) return <div className="Loading">
 							<Icon.Loading />
