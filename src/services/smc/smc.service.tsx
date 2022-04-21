@@ -243,6 +243,7 @@ export class SmcService {
     }
 
     static async fetchIdoInvestor(store: Store) {
+        if (!this.contractIDO || !this.contractIDO.methods) return;
         const data = await this.contractIDO.methods.investors(this.address).call();
         const isClaimed = await this.contractIDO.methods
             .claimed(this.address)
@@ -255,6 +256,7 @@ export class SmcService {
     }
 
     static async fetchIdoPrice(store: Store) {
+        if (!this.contractIDO || !this.contractIDO.methods) return;
         const data = await this.contractIDO.methods
             .price()
             .call()
@@ -268,6 +270,7 @@ export class SmcService {
     }
 
     static async buyToken(store: Store, affiliateCode: string, amount: number) {
+        if (!this.contractIDO || !this.contractIDO.methods) return;
         const payableAmount = this.convertAmount("encode", amount);
         const refer = affiliateCode || this.configs.SMC_ROOT_ADDRESS;
         try {
@@ -283,6 +286,7 @@ export class SmcService {
     }
 
     static async claim(store: Store, affiliateCode: string) {
+        if (!this.contractIDO || !this.contractIDO.methods) return;
         const refer = affiliateCode || this.configs.SMC_ROOT_ADDRESS;
         try {
             await this.contractIDO.methods.claim(refer).send();
@@ -305,6 +309,7 @@ export class SmcService {
         ...args: any
     ): Promise<any> {
         return new Promise(async (resolve, reject) => {
+            if (!options || !options.contract) return;
             console.log("options", options);
             const func = options.contract.methods[options.method] as any;
             if (typeof func !== "function")
@@ -341,7 +346,7 @@ export class SmcService {
     ): Promise<Transaction> {
         return new Promise(async (resolve, reject) => {
             let interval: any, transactionHash: string;
-
+            if (!options || !options.contract) return;
             const func = options.contract.methods[options.method] as any;
             if (typeof func !== "function")
                 reject(
