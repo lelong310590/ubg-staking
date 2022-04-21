@@ -13,38 +13,37 @@ interface Props {
 }
 
 const connectWallet = async () => {
-    console.log("MMM 1, connectWallet");
+    console.log("MMM1: connectWallet");
     const providerOptions = {
         /* See Provider Options Section */
         walletconnect: {
             package: WalletConnectProvider, // required
             options: {
-                infuraId: "460f40a260564ac4a4f4b3fffb032dad" // required,
+                infuraId: "460f40a260564ac4a4f4b3fffb032dad", // required,
             },
             qrcode: true,
         }
     };
-
-    console.log("MMM 2", providerOptions);
+    console.log("MMM2 ", providerOptions);
 
     const web3Modal = new Web3Modal({
         network: "mainnet", // optional
         cacheProvider: true, // optional
         providerOptions // required
     });
-    web3Modal.clearCachedProvider();
+    console.log("MMM2-1 ", web3Modal);
 
-    console.log("MMM 3", web3Modal);
     const provider = await web3Modal.connect()
-    console.log("MMM 4", provider);
+
+    console.log("MMM2-2 ", provider);
+
     // Subscribe to accounts change
     provider.on("accountsChanged", (accounts: string[]) => {
-        console.log("MMM 5 accountsChanged");
+        console.log("MMM3: accountsChanged");
         window.location.reload
     });
 
     provider.on("chainChanged", (chainId: number) => {
-        console.log("MMM 5 chainChanged");
         console.log(chainId);
     });
 
@@ -53,6 +52,7 @@ const connectWallet = async () => {
     });
 
     provider.on("disconnect", (error: { code: number; message: string }) => {
+        console.log("MM 2: disconnect");
         window.location.reload
     });
 }

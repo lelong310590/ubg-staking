@@ -167,10 +167,6 @@ const Form: FC = () => {
 				package: WalletConnectProvider, // required
 				options: {
 					infuraId: "460f40a260564ac4a4f4b3fffb032dad", // required,
-					rpc: {
-						56: 'https://bsc-dataseed1.binance.org'
-					},
-					chainId: 56
 				},
 				qrcode: true,
 			}
@@ -277,13 +273,7 @@ const Form: FC = () => {
 					</div>
 
 					{function () {
-						if (smc.error) return <div className="block">
-							{isMobile ? (
-								<Button label={" -- " + lang.connect_wallet + " -- "} onClick={() => connectWallet()}/>
-							) : (
-								<Message type="INFO" content={smc.error} />
-							)}
-						</div>
+						<Button label={" -- " + lang.connect_wallet + " -- "} onClick={() => connectWallet()}/>
 
 						if (!isFetched) return <div className="Loading">
 							<Icon.Loading />
